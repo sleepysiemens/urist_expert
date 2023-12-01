@@ -21,7 +21,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('role')->default('user');
-            $table->string('phone')->nullable();
         });
     }
 
