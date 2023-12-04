@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('parent_name')->nullable();
 
-            $table->boolean('surname_is_changed')->default('f');
+            $table->boolean('surname_is_changed')->default(0);
 
             //registration
             $table->string('subject')->nullable();
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('flat')->nullable();
 
             //real_address
-            $table->boolean('address_matches')->default('t');
+            $table->boolean('address_matches')->default(1);
 
             $table->string('fact_subject')->nullable();
             $table->string('fact_region')->nullable();
@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('gos_uslugi_password')->nullable();
 
             //children
-            $table->boolean('have_children')->default('f');
+            $table->boolean('have_children')->default(0);
             $table->integer('children_amount')->default(0);
 
 
@@ -71,7 +71,7 @@ return new class extends Migration
             $table->string('work_place')->nullable();
 
             //pensia
-            $table->boolean('is_pensioner')->default('f');
+            $table->boolean('is_pensioner')->default(0);
             $table->string('pensioner_certificate')->nullable();
 
             //income
