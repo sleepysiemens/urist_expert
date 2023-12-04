@@ -15,7 +15,7 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if((!isset(auth()->user()->role)))
+        if((!isset(auth()->user()->role))OR (auth()->user()->role !== 'user'))
         {
             return redirect()->route('logout');
         }

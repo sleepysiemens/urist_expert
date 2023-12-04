@@ -1759,3 +1759,8 @@ table,
   }
 
 }
+
+.hide
+{
+    display: none;
+}

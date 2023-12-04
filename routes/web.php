@@ -36,6 +36,15 @@ Route::group(['namespace' => 'Employee', 'prefix' => 'employee', 'middleware' =>
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function()
 {
     Route::get('/', 'MainController@index')->name('admin.main.index');
+
+    //application
+    Route::get('/application/{application}/edit', 'ApplicationController@add_employee')->name('admin.application.add_employee');
+    Route::patch('/application/{application}', 'ApplicationController@update')->name('admin.application.update');
+
+    //documents
+    Route::get('/documents/create/{application}', 'DocumentsController@create')->name('admin.documents.create');
+    Route::get('/documents/{application}/edit', 'DocumentsController@edit')->name('admin.documents.edit');
+    Route::patch('/documents/{document}', 'DocumentsController@update')->name('admin.documents.update');
 });
 
 Auth::routes();

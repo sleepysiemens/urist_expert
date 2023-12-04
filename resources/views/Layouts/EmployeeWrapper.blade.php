@@ -18,17 +18,17 @@
 
     <header class="header">
         <div class="container">
-            <a class="header-logo" href="index.html">
-                <img src="images/logo.svg" alt="">
+            <a class="header-logo" href="{{route('enter.index')}}">
+                <img src="{{asset('images/logo.svg')}}" alt="">
             </a>
             <div class="header-nav">
                 <div class="header-search">
                     <input type="text" placeholder="Поиск..." id="search-input">
-                    <label for="search-input"><img src="images/icons/search-icons.svg" alt=" heaader search icons "> </label>
+                    <label for="search-input"><img src="{{asset(('images/icons/search-icons.svg'))}}" alt=" heaader search icons "> </label>
                 </div>
                 <div class="header-right">
-                    <img class="header-note" src="images/icons/note-icon.svg" alt=" header note icons">
-                    <img class="header-avatar" src="images/header-avatar.svg" alt=" header avatar images">
+                    <img class="header-note" src="{{asset(('images/icons/note-icon.svg'))}}" alt=" header note icons">
+                    <img class="header-avatar" src="{{asset('images/header-avatar.svg')}}" alt=" header avatar images">
                 </div>
             </div>
         </div>
@@ -36,21 +36,12 @@
 
     <main>
         <section class="main-sec">
+            <div class="container">
 
-        @yield('content')
+                @include('admin.left_sidebar')
+            @yield('content')
+            @yield('right_sidebar')
 
-            <div class="right-sidebar">
-                <span class="cabinet-employee-title">Кабинет Сотрудника</span>
-                <div class="cabinet-sidebar-employee">
-                    <div class="cabinet-employee-content">
-                        <img class="cabinet-employee-img" src="./images/user-1.png" alt="">
-                        <div class="cabinet-employee-info">
-                            <span class="cabinet-employee-name">{{auth()->user()->name}}</span>
-                            <span class="cabinet-employee-email">{{auth()->user()->email}}</span>
-                        </div>
-                    </div>
-                    <a href="{{route('logout')}}" class="commons-btn">Выход</a>
-                </div>
             </div>
 
         </section>
@@ -62,7 +53,8 @@
 </div>
 
 
-<script src="js/"></script>
+<script src="{{asset('js/main.js')}}"></script>
+<script src="{{asset('js/show_hide.js')}}"></script>
 </body>
 
 </html>

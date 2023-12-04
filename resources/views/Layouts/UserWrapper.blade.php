@@ -18,7 +18,7 @@
     <header class="header">
         <div class="container">
             <a class="header-logo" href="index.html">
-                <img src="images/logo.svg" alt="">
+                <img src="{{asset('images/logo.svg')}}" alt="">
             </a>
             <div class="header-nav">
                 <div class="header-search">

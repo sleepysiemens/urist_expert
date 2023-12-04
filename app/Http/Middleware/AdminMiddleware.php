@@ -17,7 +17,7 @@ class AdminMiddleware
     {
         if((!isset(auth()->user()->role)) OR (auth()->user()->role !== 'admin'))
         {
-            return redirect()->route('logout');
+            return redirect()->route('employee.main.index');
         }
         return $next($request);
     }

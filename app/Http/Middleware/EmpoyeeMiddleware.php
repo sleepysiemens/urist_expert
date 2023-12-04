@@ -17,7 +17,7 @@ class EmpoyeeMiddleware
     {
         if((!isset(auth()->user()->role)) OR (auth()->user()->role !== 'employee'))
         {
-            return redirect()->route('logout');
+            return redirect()->route('user.main.index');
         }
 
         return $next($request);
