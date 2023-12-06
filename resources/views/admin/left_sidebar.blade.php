@@ -37,19 +37,15 @@
     <div class="left-item-search">
         <input type="text" placeholder="Поиск..." id="1">
         <label for="1">
-            <img src="images/icons/left-side-3.svg" alt="">
+            <img src="{{asset('images/icons/left-side-3.svg')}}" alt="">
         </label>
     </div>
+    @foreach($users as $user)
+        <a href="date.html">
+            <p class="left-item-p">{{$user->phone}}</p>
+        </a>
+    @endforeach
 
-    <a href="date.html">
-        <p class="left-item-p">+79914221142312</p>
-    </a>
-    <a href="date.html">
-        <p class="left-item-p">+79914221142312</p>
-    </a>
-    <a href="shablon.html">
-        <p class="left-item-p">+79914221142312</p>
-    </a>
     <div class="left-item left-item-stroke sidebar-item left-item-klent">
         <a href="klient.html">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,19 +74,16 @@
     <div class="left-item-search">
         <input type="text" placeholder="Поиск..." id="1">
         <label for="1">
-            <img src="images/icons/left-side-3.svg" alt="">
+            <img src="{{asset('images/icons/left-side-3.svg')}}" alt="">
         </label>
     </div>
 
-    <a href="date.html">
-        <p class="left-item-p">Иванов М.Е</p>
-    </a>
-    <a href="date.html">
-        <p class="left-item-p">Иванов М.Е</p>
-    </a>
-    <a href="shablon.html">
-        <p class="left-item-p">Иванов М.Е</p>
-    </a>
+    @foreach($users as $user)
+        <a href="date.html">
+            <p class="left-item-p">{{$user->fio}}</p>
+        </a>
+    @endforeach
+
 
     <a href="document.html">
         <div class="left-item sidebar-item left-item-document">
@@ -115,7 +108,7 @@
         <p class="left-item-span "><span>Опись имушества</span> <b>254</b></p>
     </a>
     <a href="list.html">
-        <p class="left-item-span "><span>Список кредиторов</span> <b>4</b></p>
+        <p class="left-item-span "><span>Список кредиторов</span> <b>{{$creditors_amount}}</b></p>
     </a>
     <a href="glavnie.html">
         <p class="left-item-span "><span>Заявление БФЛ</span> <b>4</b></p>

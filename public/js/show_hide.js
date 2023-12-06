@@ -80,3 +80,85 @@ function obligatory_payments_amount_func()
     }
 };
 
+$('#show-password').click(function()
+{
+        $('#gos_uslugi_password').attr('type','text');
+        password_show=1;
+});
+
+$('#passport_button').click(function()
+{
+    $('#passport_info').removeClass('hide');
+    $('#inn_info').addClass('hide');
+    $('#snils_info').addClass('hide');
+    $('#employment_history_info').addClass('hide');
+    $('#marriage_certificate_info').addClass('hide');
+
+    $('#passport_button').addClass('active');
+    $('#inn_button').removeClass('active');
+    $('#snils_button').removeClass('active');
+    $('#employment_history_button').removeClass('active');
+    $('#marriage_certificate_button').removeClass('active');
+});
+
+$('#inn_button').click(function()
+{
+    $('#passport_info').addClass('hide');
+    $('#inn_info').removeClass('hide');
+    $('#snils_info').addClass('hide');
+    $('#employment_history_info').addClass('hide');
+    $('#marriage_certificate_info').addClass('hide');
+
+    $('#passport_button').removeClass('active');
+    $('#inn_button').addClass('active');
+    $('#snils_button').removeClass('active');
+    $('#employment_history_button').removeClass('active');
+    $('#marriage_certificate_button').removeClass('active');
+});
+
+$('#snils_button').click(function()
+{
+    $('#passport_info').addClass('hide');
+    $('#inn_info').addClass('hide');
+    $('#snils_info').removeClass('hide');
+    $('#employment_history_info').addClass('hide');
+    $('#marriage_certificate_info').addClass('hide');
+
+    $('#passport_button').removeClass('active');
+    $('#inn_button').removeClass('active');
+    $('#snils_button').addClass('active');
+    $('#employment_history_button').removeClass('active');
+    $('#marriage_certificate_button').removeClass('active');
+});
+
+$('#employment_history_button').click(function()
+{
+    $('#passport_info').addClass('hide');
+    $('#inn_info').addClass('hide');
+    $('#snils_info').addClass('hide');
+    $('#employment_history_info').removeClass('hide');
+    $('#marriage_certificate_info').addClass('hide');
+
+    $('#passport_button').removeClass('active');
+    $('#inn_button').removeClass('active');
+    $('#snils_button').removeClass('active');
+    $('#employment_history_button').addClass('active');
+    $('#marriage_certificate_button').removeClass('active');
+});
+
+$('#marriage_certificate_button').click(function()
+{
+    $('#passport_info').addClass('hide');
+    $('#inn_info').addClass('hide');
+    $('#snils_info').addClass('hide');
+    $('#employment_history_info').addClass('hide');
+    $('#marriage_certificate_info').removeClass('hide');
+
+    $('#passport_button').removeClass('active');
+    $('#inn_button').removeClass('active');
+    $('#snils_button').removeClass('active');
+    $('#employment_history_button').removeClass('active');
+    $('#marriage_certificate_button').addClass('active');
+});
+
+

@@ -43,8 +43,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
 
     //documents
     Route::get('/documents/create/{application}', 'DocumentsController@create')->name('admin.documents.create');
-    Route::get('/documents/{application}/edit', 'DocumentsController@edit')->name('admin.documents.edit');
+    Route::get('/documents/{application}/edit/1', 'DocumentsController@edit')->name('admin.documents.edit');
     Route::patch('/documents/{document}', 'DocumentsController@update')->name('admin.documents.update');
+    Route::patch('/documents/add_file/{document}', 'DocumentsController@add_file')->name('admin.documents.add_file');
 });
 
 Auth::routes();

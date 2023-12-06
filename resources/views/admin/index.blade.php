@@ -42,9 +42,9 @@
                                                 <div class="register-card-info">
                                                     <span class="register-card-title">Сотрудник:</span>
                                                     <span class="register-card-text">
-                                                        @foreach($users as $user)
-                                                            @if($user->id==$application->employee_id)
-                                                                {{$user->name}}
+                                                        @foreach($employees as $employee)
+                                                            @if($employee->id==$application->employee_id)
+                                                                {{$employee->name}}
                                                             @endif
                                                         @endforeach
                                                     </span>
@@ -116,15 +116,15 @@
                                         <form action="" class="cabinitet-form">
                                             <fieldset class="commons-input">
                                                 <legend>И.Ф.О</legend>
-                                                <input type="text" placeholder="Петров И. С.">
+                                                <input type="text" disabled value="{{$application->fio}}">
                                             </fieldset>
                                             <fieldset class="commons-input">
                                                 <legend>Контакты</legend>
-                                                <input type="text" placeholder="+79914221142312">
+                                                <input type="text" value="{{$application->phone}}">
                                             </fieldset>
                                             <fieldset class="commons-input">
                                                 <legend>Электронная почта</legend>
-                                                <input type="text" placeholder="p@gmail.com">
+                                                <input type="text" value="{{$application->email}}">
                                             </fieldset>
                                             <button class="content-bnt commons-btn">
                                                 Выгрузить все документы

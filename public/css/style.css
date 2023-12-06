@@ -222,7 +222,7 @@ letter-spacing: -0.115px;
 }
 
 /* btn */
-.commons-btn {
+.commons-btn, .btn-primary {
   border-radius: 7.652px;
   background: #064570;
   padding: 13px 0 11px;
@@ -961,16 +961,27 @@ letter-spacing: -0.115px;
   letter-spacing: -0.387px;
 }
 
-.content-head-item:hover {
+.content-head-item:hover, .content-head-item-active {
   border-bottom: #064570 solid 4px;
+}
+
+.content-head-item-active>p svg ellipse:last-child {
+    stroke: #064570;
 }
 
 .content-head-item:hover>p svg ellipse:last-child {
   stroke: #064570;
 }
+.content-head-item-active>p svg ellipse:last-child {
+    stroke: #064570;
+}
 
 .content-head-item:hover>p svg ellipse:first-child {
   fill: #064570;
+}
+
+.content-head-item-active>p svg ellipse:first-child {
+    fill: #064570;
 }
 
 /* input wrap */
@@ -1762,5 +1773,106 @@ table,
 
 .hide
 {
-    display: none;
+    display: none !important;
+}
+
+.justify-content-center
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 95px);
+    background-color: #F0F0F0;
+}
+
+.col-md-8
+{
+    width: 500px;
+    margin: auto;
+}
+
+.col-md-8 .card
+{
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.col-md-8 .card-header
+{
+    font-size: 20px;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.col-md-8 .card-body
+{
+    width: 90%;
+    margin: auto;
+}
+
+.mb-3
+{
+    width: 100%;
+    display: flex;
+    padding: 20px 0;
+}
+
+.mb-3 label
+{
+    font-size: 16px;
+    width: 38%;
+    margin: auto 0;
+    text-align: center;
+}
+
+.col-md-6
+{
+    width: 60%;
+}
+
+.col-md-6 input
+{
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    border: 1px solid rgba(0,0,0,.25);
+    border-radius: 15px;
+}
+
+.offset-md-4
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-check
+{
+    display: flex;
+    width: 100%;
+}
+
+.form-check-input
+{
+    margin: auto 10px;
+    width: auto !important;
+}
+
+.mb-0
+{
+    display: block;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+
+.btn-primary
+{
+    display: block;
+}
+
+.btn-link
+{
+    display: block;
+    margin: auto 0;
 }

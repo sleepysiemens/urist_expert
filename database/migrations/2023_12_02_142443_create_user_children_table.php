@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('application_id');
-            $table->string('birth_certificate');
+            $table->string('birth_certificate')->nullable();
         });
     }
 

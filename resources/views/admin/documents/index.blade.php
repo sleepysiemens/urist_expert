@@ -3,7 +3,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/show_hide.js')}}"></script>
 
-    <form class="content-wrap" action="{{route('admin.documents.update', 1)}}" method="POST" enctype="multipart/form-data">
+    <form class="content-wrap" action="{{route('admin.documents.update', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <input type="hidden" name="application_id" value="{{$application->id}}">
@@ -20,7 +20,14 @@
                         <circle cx="9.02253" cy="9.52985" r="9.02985" fill="#00875A"></circle>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.02215 15.2757C12.1957 15.2757 14.7684 12.703 14.7684 9.52947C14.7684 6.35589 12.1957 3.7832 9.02215 3.7832C5.84857 3.7832 3.27588 6.35589 3.27588 9.52947C3.27588 12.703 5.84857 15.2757 9.02215 15.2757ZM9.02256 14.1269C11.5614 14.1269 13.6196 12.0687 13.6196 9.52986C13.6196 6.991 11.5614 4.93285 9.02256 4.93285C6.48369 4.93285 4.42554 6.991 4.42554 9.52986C4.42554 12.0687 6.48369 14.1269 9.02256 14.1269ZM9.597 6.65637H8.44775V10.1041H11.3209V8.95488H9.597V6.65637Z" fill="white"></path>
                     </svg>
-                    <span class="accent-text">90 дней</span>
+                    @php
+                        $now = time();
+                        $your_date = strtotime($document[0]->created_at);
+                        $your_date = strtotime('+90 days', $your_date);
+                        $datediff = $your_date - $now;
+                        $days=floor($datediff / (60 * 60 * 24));;
+                    @endphp
+                    <span class="accent-text">{{$days}} дней</span>
                 </div>
             </a>
             <div class="content-top-right">
@@ -37,11 +44,11 @@
                         </div>
                     </div>
                 </div>
-                <img src="./images/user-1.png" alt="">
+                <img src="{{asset('images/user-1.png')}}" alt="">
             </div>
         </div>
         <div class="content-head">
-            <div class="content-head-item">
+            <div class="content-head-item content-head-item-active">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -124,29 +131,74 @@
 
             </div>
 
-            <div class="document-input-wrap wrap-reverse">
+            <div class="document-input-wrap wrap" >
                 <fieldset class="commons-input">
                     <legend>Фамилия</legend>
-                    <input type="text" name="surname" placeholder="Иванов" value="{{$document[0]->surname}}">
+                    <input type="text" name="current_surname" placeholder="Иванов" value="{{$current_passport[0]->surname}}">
                 </fieldset>
 
                 <fieldset class="commons-input">
                     <legend>Имя</legend>
-                    <input type="text" name="name" placeholder="Иванов" value="{{$document[0]->name}}">
+                    <input type="text" name="current_name" placeholder="Иванов" value="{{$current_passport[0]->name}}">
                 </fieldset>
 
                 <fieldset class="commons-input">
                     <legend>Отчество</legend>
-                    <input type="text" name="parent_name" placeholder="Иванов" value="{{$document[0]->parent_name}}">
+                    <input type="text" name="current_parent_name" placeholder="Иванов" value="{{$current_passport[0]->parent_name}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Серия</legend>
+                    <input type="text" name="current_passport_serial" placeholder="12345678" value="{{$current_passport[0]->serial}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Номер паспорта</legend>
+                    <input type="text" name="current_passport_number" placeholder="12345678" value="{{$current_passport[0]->number}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Кем выдан</legend>
+                    <input type="text" name="current_passport_kem" placeholder="Иванов" value="{{$current_passport[0]->_kem}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Дата выдачи</legend>
+                    <input type="date" name="current_date_of_issue" placeholder="12345678" value="{{$current_passport[0]->date_of_issue}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Код подразделения</legend>
+                    <input type="text" name="current_department_code" placeholder="12345678" value="{{$current_passport[0]->department_code}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Дата рождения</legend>
+                    <input type="date" name="current_date_of_birth" class="current_date_of_birth" placeholder="12345678" value="{{$current_passport[0]->date_of_birth}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Место рождения</legend>
+                    <input type="text" name="current_place_of_birth" placeholder="Москва" value="{{$current_passport[0]->place_of_birth}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>ИНН</legend>
+                    <input type="text" name="current_inn" placeholder="12345678" value="{{$current_passport[0]->inn}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>СНИЛС</legend>
+                    <input type="text" name="current_snils" placeholder="13.12.1989" value="{{$current_passport[0]->snils}}">
                 </fieldset>
 
 
-                <fieldset class="commons-input green-btn">
+            <fieldset class="commons-input green-btn">
                     <legend>Количество дней</legend>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99974 14.5544C11.5215 14.5544 14.3764 11.6994 14.3764 8.17772C14.3764 4.65597 11.5215 1.80103 7.99974 1.80103C4.47799 1.80103 1.62305 4.65597 1.62305 8.17772C1.62305 11.6994 4.47799 14.5544 7.99974 14.5544ZM8 13.2791C10.8174 13.2791 13.1013 10.9952 13.1013 8.17775C13.1013 5.36035 10.8174 3.0764 8 3.0764C5.1826 3.0764 2.89864 5.36035 2.89864 8.17775C2.89864 10.9952 5.1826 13.2791 8 13.2791ZM8.63751 4.98941H7.36217V8.81542H10.5505V7.54008H8.63751V4.98941Z" fill="#00875A"></path>
                     </svg>
-                    <span>90 дней</span>
+                    <span>{{$days}} дней</span>
                 </fieldset>
 
 
@@ -166,7 +218,7 @@
                     </svg>
                   </label>Нет
                   <label for="surname-checkbox-2">
-                    <input type="radio" id="surname-checkbox-2" checked="" hidden="" name="surname_is_changed" value="0">
+                    <input type="radio" id="surname-checkbox-2" @if($document[0]->surname_is_changed==0) checked @endif hidden="" name="surname_is_changed" value="0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                       <rect x="1.34912" y="2.16064" width="14.5694" height="14.5694" rx="2.42824" fill="#064570" stroke="#064570" stroke-width="2.42824"></rect>
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M5.84997 8.58682C5.37583 8.11268 4.60709 8.11268 4.13295 8.58682C3.65881 9.06097 3.65881 9.8297 4.13295 10.3038L6.56119 12.7321C7.03533 13.2062 7.80407 13.2062 8.27821 12.7321L13.1347 7.87561C13.6088 7.40147 13.6088 6.63273 13.1347 6.15859C12.6605 5.68444 11.8918 5.68444 11.4177 6.15859L7.4197 10.1565L5.84997 8.58682Z" fill="white"></path>
@@ -176,66 +228,66 @@
               </span>
             <!-- bu yerda chekkend bo'ladi -->
 
-            <div id="surname-div" class="hide">
+            <div id="surname-div" @if($document[0]->surname_is_changed==0) class="hide" @endif >
                 <div class="document-input-wrap wrap" >
                     <fieldset class="commons-input">
                         <legend>Фамилия</legend>
-                        <input type="text" name="old_surname" placeholder="Иванов" value="{{$document[0]->old_surname}}">
+                        <input type="text" name="old_surname" placeholder="Иванов" value="@if(isset($old_passport[0]->surname)) {{$old_passport[0]->surname}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Имя</legend>
-                        <input type="text" name="old_name" placeholder="Иванов" value="{{$document[0]->old_name}}">
+                        <input type="text" name="old_name" placeholder="Иванов" value="@if(isset($old_passport[0]->name)) {{$old_passport[0]->name}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Отчество</legend>
-                        <input type="text" name="old_parent_name" placeholder="Иванов" value="{{$document[0]->old_parent_name}}">
+                        <input type="text" name="old_parent_name" placeholder="Иванов" value="@if(isset($old_passport[0]->parent_name)) {{$old_passport[0]->parent_name}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Серия</legend>
-                        <input type="text" name="old_passport_serial" placeholder="12345678" value="{{$document[0]->old_passport_serial}}">
+                        <input type="text" name="old_passport_serial" placeholder="12345678" value="@if(isset($old_passport[0]->serial)) {{$old_passport[0]->serial}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Номер паспорта</legend>
-                        <input type="text" name="old_passport_number" placeholder="12345678" value="{{$document[0]->old_passport_number}}">
+                        <input type="text" name="old_passport_number" placeholder="12345678" value="@if(isset($old_passport[0]->number)) {{$old_passport[0]->number}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Кем выдан</legend>
-                        <input type="text" name="old_passport_kem" placeholder="Иванов" value="{{$document[0]->old_passport_kem}}">
+                        <input type="text" name="old_passport_kem" placeholder="Иванов" value="@if(isset($old_passport[0]->kem)) {{$old_passport[0]->kem}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Дата выдачи</legend>
-                        <input type="date" name="old_date_of_issue" placeholder="12345678" value="{{$document[0]->old_date_of_issue}}">
+                        <input type="date" name="old_date_of_issue" placeholder="12345678" value="@if(isset($old_passport[0]->date_of_issue)) {{$old_passport[0]->date_of_issue}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Код подразделения</legend>
-                        <input type="text" name="department_code" placeholder="12345678" value="{{$document[0]->department_code}}">
+                        <input type="text" name="old_department_code" placeholder="12345678" value="@if(isset($old_passport[0]->department_code)) {{$old_passport[0]->department_code}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Дата рождения</legend>
-                        <input type="date" class="date_of_birth" placeholder="12345678" value="{{$document[0]->date_of_birth}}">
+                        <input type="date" name="old_date_of_birth" class="old_date_of_birth" placeholder="12345678" value="@if(isset($old_passport[0]->date_of_birth)) {{$old_passport[0]->date_of_birth}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>Место рождения</legend>
-                        <input type="text" name="place_of_birth" placeholder="Москва" value="{{$document[0]->place_of_birth}}">
+                        <input type="text" name="old_place_of_birth" placeholder="Москва" value="@if(isset($old_passport[0]->place_of_birth)) {{$old_passport[0]->place_of_birth}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>ИНН</legend>
-                        <input type="text" name="inn" placeholder="12345678" value="{{$document[0]->inn}}">
+                        <input type="text" name="old_inn" placeholder="12345678" value="@if(isset($old_passport[0]->inn)) {{$old_passport[0]->inn}} @endif">
                     </fieldset>
 
                     <fieldset class="commons-input">
                         <legend>СНИЛС</legend>
-                        <input type="text" name="snils" placeholder="13.12.1989" value="{{$document[0]->snils}}">
+                        <input type="text" name="old_snils" placeholder="13.12.1989" value="@if(isset($old_passport[0]->snils)) {{$old_passport[0]->snils}} @endif">
                     </fieldset>
 
                 </div>
@@ -289,7 +341,7 @@
               </span>
             <!-- bu yerda chekkend bo'ladi -->
 
-            <div id="address-div" class="hide">
+            <div id="address-div" @if($document[0]->address_matches==1) style="display: none" @endif >
                 <h4 class="title" id="div-2">Место фактического проживания</h4>
                 <div class="document-input-wrap wrap">
 
@@ -332,14 +384,15 @@
                     <input type="text" name="gos_uslugi_login" placeholder="dkj_media.mail.ru" value="{{$document[0]->gos_uslugi_login}}">
                 </fieldset>
 
-                <fieldset class="commons-input">
+                <fieldset class="commons-input" style="position: relative">
                     <legend>Пароль</legend>
-                    <input type="password" name="gos_uslugi_password" placeholder="********" value="{{$document[0]->gos_uslugi_password}}">
+                    <input type="password" id="gos_uslugi_password" name="gos_uslugi_password" placeholder="********" value="{{$document[0]->gos_uslugi_password}}">
+                    <a id="show-password" style="position: absolute; right: 0; top: 0; bottom: 0" id="show-password">показать</a>
                 </fieldset>
 
-                <button class="commons-btn">
+                <a href="https://esia.gosuslugi.ru/login/" target="_blank" class="commons-btn">
                     Гос услуги
-                </button>
+                </a>
 
                 <div class="checked-wrap">
                     <span>У вас есть дети?</span>
@@ -354,7 +407,7 @@
                   </span>
                 </div>
 
-                <div id="children-div" class="hide">
+                <div id="children-div" @if($document[0]->have_children==0) style="display: none" @endif >
                     <fieldset class="commons-input">
                         <legend>Сколько у вас детей?</legend>
                         <input type="number" name="children_amount" placeholder="3" id="children-input" value="{{$document[0]->children_amount}}">
@@ -363,9 +416,9 @@
 
             </div>
 
-            <div class="document-btn-wrap" id="birth-certificate-div" style="display: none">
-                <label class="commons-btn-blue upload actives " for="birth-certiicate-input" >
-                    <input class="input-file" hidden="" id="birth-certiicate-input" type="file" @if($document[0]->have_children==1) checked @endif>
+            <div class="document-btn-wrap" id="birth-certificate-div" @if($document[0]->have_children==0) style="display: none" @endif >
+                <label class="commons-btn-blue upload actives " for="birth-certificate-input" >
+                    <input class="input-file" hidden="" id="birth-certificate-input" name="birth_certificate[]" type="file" @if($document[0]->have_children==1) checked @endif multiple>
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -389,9 +442,9 @@
                   </span>
                 </div>
                 <!-- big -->
-                <div style="display: none" id="marriage-div-1">
-                    <label class="commons-btn-blue upload actives" for="input-file-18">
-                        <input class="input-file" id="input-file-18" type="file" hidden="">
+                <div id="marriage-div-1" @if($document[0]->is_married==0) style="display: none" @endif>
+                    <label class="commons-btn-blue upload actives" for="marriage_certificate">
+                        <input class="input-file" name="marriage_certificate" id="marriage_certificate" type="file" hidden="">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                         </svg>
@@ -402,9 +455,9 @@
                 </div>
             </div>
 
-            <div class="document-btn-wrap" style="display: none" id="marriage-div-2">
-                <label class="commons-btn-blue upload actives" for="input-file-20">
-                    <input class="input-file" id="input-file-20" type="file" hidden="">
+            <div class="document-btn-wrap" @if($document[0]->is_married==0) style="display: none" @endif id="marriage-div-2">
+                <label class="commons-btn-blue upload actives" for="spouse_passport">
+                    <input class="input-file" id="spouse_passport" name="spouse_passport" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -412,8 +465,8 @@
                     Паспорт супруга
                   </span>
                 </label>
-                <label class="commons-btn-blue upload actives" for="input-file-21">
-                    <input class="input-file" id="input-file-21" type="file" hidden="">
+                <label class="commons-btn-blue upload actives" for="spouse_snils">
+                    <input class="input-file" id="spouse_snils" name="spouse_snils" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -421,8 +474,8 @@
                     СНИЛС
                   </span>
                 </label>
-                <label class="commons-btn-blue upload actives" for="input-file-22">
-                    <input class="input-file" id="input-file-22" type="file" hidden="">
+                <label class="commons-btn-blue upload actives" for="spouse_inn">
+                    <input class="input-file" id="spouse_inn" name="spouse_inn" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -446,9 +499,9 @@
                     </label>
                   </span>
                 </span>
-                <div id="work-div-1" style="display: none;">
-                    <label class="commons-btn-blue upload actives" for="input-file-23">
-                        <input class="input-file" id="input-file-23" type="file" hidden="">
+                <div id="work-div-1" @if($document[0]->is_work_official==0) style="display: none;" @endif >
+                    <label class="commons-btn-blue upload actives" for="employment_history">
+                        <input class="input-file" id="employment_history" name="employment_history" type="file" hidden="">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                         </svg>
@@ -482,9 +535,9 @@
                     </label>
                   </span>
                 </span>
-                <div id="pensioner-div" style="display: none">
-                    <label class="commons-btn-blue upload actives" for="input-file-24">
-                        <input class="input-file" id="input-file-24" type="file" hidden="">
+                <div id="pensioner-div" @if($document[0]->is_pensioner==0) style="display: none" @endif >
+                    <label class="commons-btn-blue upload actives" for="pensioner_certificate">
+                        <input class="input-file" id="pensioner_certificate" name="pensioner_certificate" type="file" hidden="">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                         </svg>
@@ -504,8 +557,8 @@
                     <input type="number" placeholder="40 000" name="income" value="{{$document[0]->income}}">
                 </fieldset>
 
-                <label class="commons-btn-blue upload actives" for="input-file-25">
-                    <input class="input-file" id="input-file-25" type="file" hidden="">
+                <label class="commons-btn-blue upload actives" for="2_ndfl">
+                    <input class="input-file" id="2_ndfl" name="2_ndfl" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -513,8 +566,8 @@
                     2-НДФЛ за 3 года
                   </span>
                 </label>
-                <label class="commons-btn-blue small upload actives" for="input-file-26">
-                    <input class="input-file" id="input-file-26" type="file" hidden="">
+                <label class="commons-btn-blue small upload actives" for="ils">
+                    <input class="input-file" id="ils" name="ils" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -522,8 +575,8 @@
                     ИЛС
                   </span>
                 </label>
-                <label class="commons-btn-blue upload actives" for="input-file-27">
-                    <input class="input-file" id="input-file-27" type="file" hidden="">
+                <label class="commons-btn-blue upload actives" for="appointment_certificate_pensions">
+                    <input class="input-file" id="appointment_certificate_pensions" name="appointment_certificate_pensions" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -542,7 +595,7 @@
 
                 <button class="commons-btn">
                   <span>
-                    2-НДФЛ за 3 года
+                    Запросить
                   </span>
                 </button>
                 <button class="commons-btn small">
@@ -552,7 +605,7 @@
                 </button>
                 <button class="commons-btn mw-229">
                   <span>
-                    Справка о назнач. пенсиях
+                    Запросить
                   </span>
                 </button>
 
@@ -561,8 +614,8 @@
             <h4 class="title">Недвижимое имущество</h4>
 
             <div class="document-btn-wrap">
-                <label class="commons-btn-blue upload actives" for="input-file-28">
-                    <input class="input-file" id="input-file-28" hidden="" type="file">
+                <label class="commons-btn-blue upload actives" for="estate_egrn">
+                    <input class="input-file" id="estate_egrn" name="estate_egrn" hidden="" type="file">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -654,8 +707,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue big upload actives" for="input-file-30">
-                    <input class="input-file" id="input-file-30" type="file" hidden="">
+                <label class="commons-btn-blue big upload actives" for="residential_houses_certificate">
+                    <input class="input-file" id="residential_houses_certificate" name="residential_houses_certificate" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -730,8 +783,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue big upload actives" for="input-file-31">
-                    <input class="input-file" id="input-file-31" type="file" hidden="">
+                <label class="commons-btn-blue big upload actives" for="flats_certificate">
+                    <input class="input-file" id="flats_certificate" name="flats_certificate" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -773,8 +826,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue big upload actives" for="input-file-32">
-                    <input class="input-file" id="input-file-32" type="file" hidden="">
+                <label class="commons-btn-blue big upload actives" for="garages_certificate">
+                    <input class="input-file" id="garages_certificate" name="garages_certificate" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -816,8 +869,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue big upload actives" for="input-file-33">
-                    <input class="input-file" id="input-file-33" type="file" hidden="">
+                <label class="commons-btn-blue big upload actives" for="another_estate_certificate">
+                    <input class="input-file" id="another_estate_certificate" name="another_estate_certificate" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -882,8 +935,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-1">
-                    <input class="input-file" type="file" id="input-file-1" hidden="">
+                <label class="commons-btn-blue small upload actives" for="cargo_vehicles_pts">
+                    <input class="input-file" type="file" id="cargo_vehicles_pts" name="cargo_vehicles_pts" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -945,7 +998,7 @@
 
                 <fieldset class="commons-input number-input">
                     <legend>Количество</legend>
-                    <input type="number" placeholder="1" name="cargo_motorized_transport" value="{{$document[0]->cargo_motorized_transport}}">
+                    <input type="number" placeholder="1" name="motorized_transport_amount" value="{{$document[0]->motorized_transport_amount}}">
                     <div class="arrow">
                     <span class="arrow-up">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -960,8 +1013,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-4">
-                    <input class="input-file" id="input-file-4" hidden="" type="file">
+                <label class="commons-btn-blue small upload actives" for="motorized_transport_pts">
+                    <input class="input-file" id="motorized_transport_pts" name="motorized_transport_pts" hidden="" type="file">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1002,8 +1055,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-5">
-                    <input class="input-file" id="input-file-5" hidden="" type="file">
+                <label class="commons-btn-blue small upload actives" for="agricultural_technique_pts">
+                    <input class="input-file" id="agricultural_technique_pts" name="agricultural_technique_pts" hidden="" type="file">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1044,8 +1097,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-6">
-                    <input class="input-file" id="input-file-6" hidden="" type="file'">
+                <label class="commons-btn-blue small upload actives" for="water_transport_pts">
+                    <input class="input-file" id="water_transport_pts" name="water_transport_pts" hidden="" type="file'">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1086,8 +1139,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-7">
-                    <input class="input-file" id="input-file-7" hidden="" type="file">
+                <label class="commons-btn-blue small upload actives" for="air_transport_pts">
+                    <input class="input-file" id="air_transport_pts" name="air_transport_pts" hidden="" type="file">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1128,8 +1181,8 @@
                     </div>
                 </fieldset>
 
-                <label class="commons-btn-blue small upload actives" for="input-file-7-0">
-                    <input class="input-file" id="input-file-7-0" hidden="" type="file">
+                <label class="commons-btn-blue small upload actives" for="other_transport_pts">
+                    <input class="input-file" id="other_transport_pts" name="other_transport_pts" hidden="" type="file">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1142,8 +1195,8 @@
             <h4 class="title">Сведения о счетах в банках и иных кредитных учреждениях</h4>
             <div class=" document-input-wrap"> <!--number input-->
 
-                <label class="commons-btn-blue upload actives" for="input-file-35">
-                    <input class="input-file" id="input-file-35" type="file" hidden="">
+                <label class="commons-btn-blue upload actives" for="tax_certificate">
+                    <input class="input-file" id="tax_certificate" name="tax_certificate" type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1207,8 +1260,8 @@
                             <input type="number" name="bank_account_rest_{{$i}}" placeholder="145 000" @if(isset($bank_accounts[$i-1])) value="{{$bank_accounts[$i-1]->bank_account_rest}}" @endif>
                         </fieldset>
 
-                        <label class="commons-btn-blue upload actives" for="input-file-36">
-                            <input class="input-file" id="input-file-36" type="file" hidden="">
+                        <label class="commons-btn-blue upload actives" for="bank_account_account_statement_{{$i}}">
+                            <input class="input-file" id="bank_account_account_statement_{{$i}}" name="bank_account_account_statement_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.7966C10.5034 14.7966 10.0926 14.3858 10.0926 13.879V7.3118L7.11751 10.2869L5.81992 8.98932L11.0102 3.79901L16.2006 8.98932L14.903 10.2869L11.9277 7.31158V13.879C11.9277 14.3858 11.5169 14.7966 11.0101 14.7966ZM5.50497 12.9743H3.66992V16.6444C3.66992 17.6579 4.4915 18.4794 5.50497 18.4794H16.5153C17.5288 18.4794 18.3503 17.6579 18.3503 16.6444V12.9743H16.5153V16.6444H5.50497V12.9743Z" fill="white"></path>
                             </svg>
@@ -1314,7 +1367,7 @@
                     </div>
                 </fieldset>
             </div>
-            @for($i=1; $i<=10; $i++)
+            @for($i=1; $i<=1; $i++)
                 <div class="obligatory_payments_div_{{$i}} hide">
                     <div class="input-wrap pt-0">
 
@@ -1339,8 +1392,8 @@
                             </select>
                         </fieldset>
 
-                        <label class="commons-btn-blue big upload actives mw-209" for="input-file-41">
-                            <input class="input-file" id="input-file-41" type="file" hidden="">
+                        <label class="commons-btn-blue big upload actives mw-209" for="obligatory_tax_requirements_{{$i}}">
+                            <input class="input-file" id="obligatory_tax_requirements_{{$i}}" name="obligatory_tax_requirements_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                             </svg>
@@ -1355,16 +1408,16 @@
 
                         <fieldset class="commons-input">
                             <legend>Сумма просроченной</legend>
-                            <input type="text" placeholder="1500000" main="obligatory_expired_duty_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->main_duty}}" @endif>
+                            <input type="text" placeholder="1500000" name="obligatory_expired_duty_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->main_duty}}" @endif>
                         </fieldset>
 
                         <fieldset class="commons-input">
                             <legend>Штрафы, пени</legend>
-                            <input type="number" placeholder="150000" main="obligatory_fines_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->fines}}" @endif>
+                            <input type="number" placeholder="150000" name="obligatory_fines_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->fines}}" @endif>
                         </fieldset>
 
-                        <label class="commons-btn-blue upload actives big mw-209" for="input-file-42">
-                            <input class="input-file" id="input-file-42" type="file" hidden="">
+                        <label class="commons-btn-blue upload actives big mw-209" for="obligatory_certificate_of_absence_{{$i}}">
+                            <input class="input-file" id="obligatory_certificate_of_absence_{{$i}}" name="obligatory_certificate_of_absence_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                             </svg>
@@ -1373,8 +1426,8 @@
                     ИП</span>
                         </label>
 
-                        <label class="commons-btn-blue upload actives big mw-209" for="input-file-43">
-                            <input class="input-file" id="input-file-43" type="file" hidden="">
+                        <label class="commons-btn-blue upload actives big mw-209" for="obligatory_state_duty_{{$i}}">
+                            <input class="input-file" id="obligatory_state_duty_{{$i}}" name="obligatory_state_duty_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                             </svg>
@@ -1382,8 +1435,8 @@
                     Гос. пошлина
                   </span>
                         </label>
-                        <label class="commons-btn-blue upload actives big mw-209" for="input-file-44">
-                            <input class="input-file" id="input-file-44" type="file" hidden="">
+                        <label class="commons-btn-blue upload actives big mw-209" for="obligatory_court_deposit_{{$i}}">
+                            <input class="input-file" id="obligatory_court_deposit_{{$i}}" name="obligatory_court_deposit_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                             </svg>
@@ -1478,13 +1531,11 @@
                       Выгрузить все документы
                     </span>
                     </label>
-                    <label class="commons-btn big mw-209" for="input-file-17">
-                        <input class="input-file" id="input-file-17" type="file" hidden="">
-
+                    <a href="" class="commons-btn big mw-209">
                         <span>
                       Следующий этап
                     </span>
-                    </label>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1492,18 +1543,116 @@
 @endsection
 
 @section('right_sidebar')
-    <div class="right-sidebar document-sidebar">
+    <form action="{{route('admin.documents.add_file', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('patch')
+        <input type="hidden" name="application_id" value="{{$application->id}}">
+        <input type="hidden" name="fio" value="{{$application->fio}}">
+        <button style="display: none" id="file_submit"></button>
+        <div class="right-sidebar document-sidebar">
         <div class="document-btns">
-            <button class="commons-btn-154 active">Паспорт
-            </button><button class="commons-btn-154">ИНН</button>
-            <button class="commons-btn-154">СНИЛС</button>
-            <button class="commons-btn-154">Трудовая книжка</button>
-            <button class="commons-btn-154">Свидетельство о брака</button>
-            <button class="commons-btn-154">Свидетельство о брака</button>
+            <a class="commons-btn-154 active" id="passport_button">Паспорт</a>
+            <a class="commons-btn-154" id="inn_button">ИНН</a>
+            <a class="commons-btn-154" id="snils_button">СНИЛС</a>
+            <a class="commons-btn-154" id="employment_history_button">Трудовая книжка</a>
+            <a class="commons-btn-154" id="marriage_certificate_button">Свидетельство о брака</a>
         </div>
-        <div><span>Scan-1001.jpg</span><span><a href="#"><u>Download</u></a></span></div>
-        <div class="document-img">
-            <img src="images/document-img].svg" alt="">
+
+        <div id="passport_info">
+            @if($document[0]->passport_file!=NULL)
+                <div><span>{{$document[0]->passport_file}}</span><span><a href="#"><u>Download</u></a></span></div>
+                <div class="document-img" >
+                    <img src="{{asset('user_docs/'.$document[0]->fio.'/passport/'.$document[0]->passport_file)}}" alt="">
+                </div>
+            @else
+                <label class="commons-btn-blue upload actives" for="passport_file">
+                    <input class="input-file" id="passport_file" name="passport_file" hidden="" type="file" onchange="this.form.submit()">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
+                    </svg>
+                    <span>
+                    Загрузить файл
+                  </span>
+                </label>
+            @endif
         </div>
+
+        <div class="hide" id="inn_info">
+            @if($document[0]->inn_file!=NULL)
+                <div><span>{{$document[0]->inn_file}}</span><span><a href="#"><u>Download</u></a></span></div>
+                <div class="document-img" >
+                    <img src="{{asset('user_docs/'.$document[0]->fio.'/inn/'.$document[0]->inn_file)}}" alt="">
+                </div>
+            @else
+                <label class="commons-btn-blue upload actives" for="inn_file">
+                    <input class="input-file" id="inn_file" name="inn_file" hidden="" type="file" onchange="this.form.submit()">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
+                    </svg>
+                    <span>
+                    Загрузить файл
+                  </span>
+                </label>
+            @endif
+        </div>
+
+        <div class="hide" id="snils_info">
+            @if($document[0]->snils_file!=NULL)
+                <div><span>{{$document[0]->snils_file}}</span><span><a href="#"><u>Download</u></a></span></div>
+                <div class="document-img" >
+                    <img src="{{asset('user_docs/'.$document[0]->fio.'/snils/'.$document[0]->snils_file)}}" alt="">
+                </div>
+            @else
+                <label class="commons-btn-blue upload actives" for="snils_file">
+                    <input class="input-file" id="snils_file" name="snils_file" hidden="" type="file" onchange="this.form.submit()">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
+                    </svg>
+                    <span>
+                    Загрузить файл
+                  </span>
+                </label>
+            @endif
+        </div>
+
+        <div class="hide" id="employment_history_info">
+            @if($document[0]->employment_history!=NULL)
+                <div><span>{{$document[0]->employment_history}}</span><span><a href="#"><u>Download</u></a></span></div>
+                <div class="document-img" >
+                    <img src="{{asset('user_docs/'.$document[0]->fio.'/employment_history/'.$document[0]->employment_history)}}" alt="">
+                </div>
+            @else
+                <label class="commons-btn-blue upload actives" for="employment_history">
+                    <input class="input-file" id="employment_history" name="employment_history" hidden="" type="file" onchange="this.form.submit()">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
+                    </svg>
+                    <span>
+                    Загрузить файл
+                  </span>
+                </label>
+            @endif
+        </div>
+
+        <div class="hide" id="marriage_certificate_info">
+            @if($document[0]->marriage_certificate!=NULL)
+                <div><span>{{$document[0]->marriage_certificate}}</span><span><a href="#"><u>Download</u></a></span></div>
+                <div class="document-img" >
+                    <img src="{{asset('user_docs/'.$document[0]->fio.'/marriage_certificate/'.$document[0]->marriage_certificate)}}" alt="">
+                </div>
+            @else
+                <label class="commons-btn-blue upload actives" for="marriage_certificate">
+                    <input class="input-file" id="marriage_certificate" name="marriage_certificate" hidden="" type="file" onchange="this.form.submit()">
+                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
+                    </svg>
+                    <span>
+                    Загрузить файл
+                  </span>
+                </label>
+            @endif
+        </div>
+
     </div>
+    </form>
     @endsection
