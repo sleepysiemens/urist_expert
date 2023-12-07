@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_water_transports', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('number');
             $table->integer('application_id');
             $table->string('pts')->nullable();
             $table->string('subject')->nullable();

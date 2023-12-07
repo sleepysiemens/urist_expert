@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_children', function (Blueprint $table) {
+        Schema::create('user_marriages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('number');
             $table->integer('application_id');
-            $table->string('birth_certificate')->nullable();
+            $table->string('marriage_certificate')->nullable();
+            $table->string('spouse_passport')->nullable();
+            $table->string('spouse_snils')->nullable();
+            $table->string('spouse_inn')->nullable();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_children');
+        Schema::dropIfExists('user_marrages');
     }
 };

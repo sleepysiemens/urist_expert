@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Application;
+use App\Models\CreditorNotification;
 use App\Models\ObligatoryPayment;
 use App\Models\User;
 use App\Models\UserDoc;
@@ -40,9 +41,30 @@ class DocumentsController extends Controller
             'phone'=>$application->phone,
             'email'=>$application->email,
         ];
-        $passport_data=['application_id'=>$application->id];
+        $application_id=['application_id'=>$application->id];
         UserDoc::create($data);
-        UserCurrentPassport::create($passport_data);
+        UserCurrentPassport::create($application_id);
+        OldPassport::create($application_id);
+
+        for($i=1; $i<=10;$i++)
+        {
+            $application_id=['application_id'=>$application->id, 'number'=>$i];
+            UserChild::create($application_id);
+            UserLandPlot::create($application_id);
+            UserResidentialHouse::create($application_id);
+            UserFlat::create($application_id);
+            UserGarage::create($application_id);
+            UserAnotherEstate::create($application_id);
+            UserCargoVehicle::create($application_id);
+            UserMotorizedTransport::create($application_id);
+            UserAgriculturalTechnique::create($application_id);
+            UserWaterTransport::create($application_id);
+            UserAirTransport::create($application_id);
+            UserOtherTransport::create($application_id);
+            BankAccount::create($application_id);
+            Credotor::create($application_id);
+            CreditorNotification::create($application_id);
+        }
 
         $data=['stage'=>1];
         $application->update($data);
@@ -56,16 +78,25 @@ class DocumentsController extends Controller
     //================================EDIT DOCUMENT PAGE================================\\
     public function edit(Application $application)
     {
+        $page=1;
         $document=UserDoc::query()->where('application_id','=',$application->id)->get();
         $bank_accounts=BankAccount::query()->where('application_id','=',$application->id)->get();
         $creditors=Credotor::query()->where('application_id','=',$application->id)->get();
         $users=User::query()->where('role','=','user')->get();
-        $creditors_amount=Credotor::count();
+        $creditors_amount=Credotor::query()->where('application_id','=',$application->id)->count();
 
         $current_passport=UserCurrentPassport::query()->where('application_id','=',$application->id)->get();
         $old_passport=OldPassport::query()->where('application_id','=',$application->id)->get();
 
-        return view('admin.documents.index', compact(['document', 'application', 'bank_accounts', 'users', 'creditors_amount', 'current_passport', 'old_passport']));
+        return view('admin.documents.index', compact(['document',
+            'application',
+            'bank_accounts',
+            'users',
+            'creditors_amount',
+            'current_passport',
+            'old_passport',
+            'page'
+        ]));
     }
 
 
@@ -77,14 +108,18 @@ class DocumentsController extends Controller
         //birth_certificate
         if(isset($data['birth_certificate']))
         {
+            $i=0;
             foreach ($data['birth_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/birth_certificates/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'birth_certificate'=>$name];
-                UserChild::create($sql_data);
+                $sql_data=['birth_certificate'=>$name];
+                $user_children=UserChild::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_children[$i]->update($sql_data);
+                $i++;
             }
         }
 
@@ -200,79 +235,99 @@ class DocumentsController extends Controller
         //land_plot
         if(isset($data['land_plots_certificate']))
         {
+            $i=0;
             foreach ($data['land_plots_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/land_plots_certificate/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserLandPlot::create($sql_data);
+                $sql_data=['certificate'=>$name];
+                $user_land_plots=UserLandPlot::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_land_plots[$i]->update($sql_data);
+                $i++;
             }
         }
         //residential_houses
         if(isset($data['residential_houses_certificate']))
         {
+            $i=0;
             foreach ($data['residential_houses_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/residential_houses_certificate/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserResidentialHouse::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
+                //UserResidentialHouse::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_residential_houses=UserResidentialHouse::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_residential_houses[$i]->update($sql_data);
+                $i++;
             }
         }
         //flats
         if(isset($data['flats_certificate']))
         {
+            $i=0;
             foreach ($data['flats_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/flats_certificate/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserFlat::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
+                //UserFlat::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_flats=UserFlat::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_flats[$i]->update($sql_data);
+                $i++;
             }
         }
         //garages
         if(isset($data['garages_certificate']))
         {
+            $i=0;
             foreach ($data['garages_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/garages_certificate/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserGarage::create($sql_data);
-            }
-        }
-        //garages
-        if(isset($data['garages_certificate']))
-        {
-            foreach ($data['garages_certificate'] as $children)
-            {
-                $name=$children->getClientOriginalName();
-                $file = $children;
-                $file->move(public_path() . '/user_docs/'.$data['fio'].'/garages_certificate/', $name);
+                //$sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
+                //UserGarage::create($sql_data);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserGarage::create($sql_data);
+                $sql_data=['certificate'=>$name];
+                $user_garages=UserGarage::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_garages[$i]->update($sql_data);
+                $i++;
             }
         }
+
         //another_estate
         if(isset($data['another_estate_certificate']))
         {
+            $i=0;
             foreach ($data['another_estate_certificate'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/another_estate_certificate/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
-                UserAnotherEstate::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'certificate'=>$name];
+                //UserAnotherEstate::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_another_esate=UserAnotherEstate::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_another_esate[$i]->update($sql_data);
+                $i++;
             }
         }
 
@@ -289,79 +344,121 @@ class DocumentsController extends Controller
         //cargo_vehicles
         if(isset($data['cargo_vehicles_pts']))
         {
+            $i=0;
             foreach ($data['cargo_vehicles_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/cargo_vehicles_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserCargoVehicle::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserCargoVehicle::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_cargo_vehicles=UserCargoVehicle::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_cargo_vehicles[$i]->update($sql_data);
+                $i++;
             }
         }
         //motorized_transport
         if(isset($data['motorized_transport_pts']))
         {
+            $i=0;
             foreach ($data['motorized_transport_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/motorized_transport_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserMotorizedTransport::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserMotorizedTransport::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_motorized_transport=UserMotorizedTransport::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_motorized_transport[$i]->update($sql_data);
+                $i++;
             }
         }
         //agricultural_technique
         if(isset($data['agricultural_technique_pts']))
         {
+            $i=0;
             foreach ($data['agricultural_technique_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/agricultural_technique_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserAgriculturalTechnique::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserAgriculturalTechnique::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_agricultural_technique=UserAgriculturalTechnique::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_agricultural_technique[$i]->update($sql_data);
+                $i++;
             }
         }
         //water_transport
         if(isset($data['water_transport_pts']))
         {
+            $i=0;
             foreach ($data['water_transport_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/water_transport_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserWaterTransport::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserWaterTransport::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_water_transport=UserWaterTransport::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_water_transport[$i]->update($sql_data);
+                $i++;
             }
         }
         //air_transport
         if(isset($data['air_transport_pts']))
         {
+            $i=0;
             foreach ($data['air_transport_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/air_transport_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserAirTransport::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserAirTransport::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_air_transport=UserAirTransport::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_air_transport[$i]->update($sql_data);
+                $i++;
             }
         }
         //other_transport
         if(isset($data['other_transport_pts']))
         {
+            $i=0;
             foreach ($data['other_transport_pts'] as $children)
             {
                 $name=$children->getClientOriginalName();
                 $file = $children;
                 $file->move(public_path() . '/user_docs/'.$data['fio'].'/other_transport_pts/', $name);
 
-                $sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
-                UserOtherTransport::create($sql_data);
+                //$sql_data=['application_id'=>$data['application_id'], 'pts'=>$name];
+                //UserOtherTransport::create($sql_data);
+
+                $sql_data=['certificate'=>$name];
+                $user_other_transport=UserOtherTransport::query()->where('application_id','=',$data['application_id'])->get();
+
+                $user_other_transport[$i]->update($sql_data);
+                $i++;
             }
 
         }
@@ -371,6 +468,8 @@ class DocumentsController extends Controller
         {
             for($i=1;$i<=$data['bank_accounts_amount'];$i++)
             {
+                $bank_account=BankAccount::query()->where('application_id','=',$data['application_id'])->where('number','=',$i)->get();
+
                 if(isset($data['bank_account_account_statement_'.$i]))
                 {
                     foreach ($data['bank_account_account_statement_'.$i] as $children)
@@ -380,7 +479,6 @@ class DocumentsController extends Controller
                         $file->move(public_path() . '/user_docs/'.$data['fio'].'/bank_account_statement_/', $name);
 
                         $sql_data=[
-                            'application_id'=>$data['application_id'],
                             'bank_name'=>$data['bank_accounts_bank_name_'.$i],
                             'kind_of_account'=>$data['bank_accounts_kind_of_account_'.$i],
                             'creation_date'=>$data['bank_accounts_creation_date_'.$i],
@@ -392,14 +490,14 @@ class DocumentsController extends Controller
                 else
                 {
                     $sql_data=[
-                        'application_id'=>$data['application_id'],
                         'bank_name'=>$data['bank_accounts_bank_name_'.$i],
                         'kind_of_account'=>$data['bank_accounts_kind_of_account_'.$i],
                         'creation_date'=>$data['bank_accounts_creation_date_'.$i],
                         'bank_account_rest'=>$data['bank_account_rest_'.$i],
                     ];
                 }
-                BankAccount::create($sql_data);
+                //BankAccount::create($sql_data);
+                $bank_account[0]->update($sql_data);
             }
         }
 
@@ -408,6 +506,7 @@ class DocumentsController extends Controller
         {
             for($i=1;$i<=$data['credotors_amount'];$i++)
             {
+                $creditor=Credotor::query()->where('application_id','=',$data['application_id'])->where('number','=',$i)->get();
                 if(isset($data['credotors_statement_'.$i]))
                 {
                     foreach ($data['credotors_statement_'.$i] as $children)
@@ -417,7 +516,6 @@ class DocumentsController extends Controller
                         $file->move(public_path() . '/user_docs/'.$data['fio'].'/credotors_statement/', $name);
 
                         $sql_data=[
-                            'application_id'=>$data['application_id'],
                             'name'=>$data['creditors_name_'.$i],
                             'kind_of_account'=>$data['creditors_kind_of_credit_'.$i],
                             'region'=>$data['creditors_region_'.$i],
@@ -428,13 +526,13 @@ class DocumentsController extends Controller
                 else
                 {
                     $sql_data=[
-                        'application_id'=>$data['application_id'],
                         'name'=>$data['creditors_name_'.$i],
                         'kind_of_account'=>$data['creditors_kind_of_credit_'.$i],
                         'region'=>$data['creditors_region_'.$i],
                     ];
                 }
-                BankAccount::create($sql_data);
+                //BankAccount::create($sql_data);
+                $creditor[0]->update($sql_data);
             }
         }
 
@@ -443,8 +541,8 @@ class DocumentsController extends Controller
         {
             for($i=1;$i<=$data['obligatory_payments_amount'];$i++)
             {
+                $obligatory_payment=ObligatoryPayment::query()->where('application_id','=',$data['application_id'])->where('number','=',$i)->get();
                 $sql_data=[
-                    'application_id'=>$data['application_id'],
                     'tax_name'=>$data['obligatory_payments_tax_name_'.$i],
                     'arrears'=>$data['obligatory_arrears_'.$i],
                     'kind_of_credit'=>$data['obligatory_kind_of_credit_'.$i],
@@ -502,8 +600,26 @@ class DocumentsController extends Controller
                     }
                 }
 
-                ObligatoryPayment::create($sql_data);
+                //ObligatoryPayment::create($sql_data);
+                $obligatory_payment[0]->update($sql_data);
+            }
+        }
 
+        //creditor_notifications
+        if(isset($data['creditor_notifications_certificate']))
+        {
+            $i=0;
+            foreach ($data['creditor_notifications_certificate'] as $cetificate)
+            {
+                $name=$cetificate->getClientOriginalName();
+                $file = $cetificate;
+                $file->move(public_path() . '/user_docs/'.$data['fio'].'/creditor_notifications_certificate/', $name);
+
+                $sql_data=['certificate'=>$name];
+                $creditor_notifications=CreditorNotification::query()->where('application_id','=',$data['application_id'])->get();
+
+                $creditor_notifications[$i]->update($sql_data);
+                $i++;
             }
         }
 
@@ -525,6 +641,10 @@ class DocumentsController extends Controller
               'snils'=>$data['current_snils'],
             ];
 
+        $current_passport=UserCurrentPassport::query()->where('application_id','=',$data['application_id'])->get();
+        $current_passport[0]->update($current_pasport_data);
+
+
         $old_pasport_data=
             [
                 'application_id'=>$data['application_id'],
@@ -541,6 +661,9 @@ class DocumentsController extends Controller
                 'inn'=>$data['old_inn'],
                 'snils'=>$data['old_snils'],
             ];
+
+        $old_pasport=OldPassport::query()->where('application_id','=',$data['application_id'])->get();
+        $old_pasport[0]->update($current_pasport_data);
 
         //unset for UserDocs
         unset($data['_token']);
@@ -621,6 +744,7 @@ class DocumentsController extends Controller
         return redirect()->route('admin.documents.edit', request()->application_id);
     }
 
+
     //================================/UPDATE DOCUMENT PAGE================================\\
 
     //================================UPLOAD DOCUMENTS================================\\
@@ -676,6 +800,43 @@ class DocumentsController extends Controller
         return redirect()->route('admin.documents.edit', request()->application_id);
     }
     //================================/UPLOAD DOCUMENTS================================\\
+
+
+    //================================SECOND STAGE DOCUMENTS================================\\
+    public function second_stage(Application $application)
+    {
+        $sql_data=['stage'=>2];
+        $application->update($sql_data);
+        return redirect()->route('admin.documents.stage_2', $application->id);
+    }
+    //================================/SECOND STAGE DOCUMENTS================================\\
+
+    //================================STAGE 2 DOCUMENTS================================\\
+    public function stage_2(Application $application)
+    {
+        $page=2;
+        $document=UserDoc::query()->where('application_id','=',$application->id)->get();
+        $bank_accounts=BankAccount::query()->where('application_id','=',$application->id)->where('bank_name','!=','NULL')->get();
+        $creditors=Credotor::query()->where('application_id','=',$application->id)->get();
+        $users=User::query()->where('role','=','user')->get();
+        $creditors_amount=Credotor::query()->where('application_id','=',$application->id)->count();
+
+        $current_passport=UserCurrentPassport::query()->where('application_id','=',$application->id)->get();
+        $old_passport=OldPassport::query()->where('application_id','=',$application->id)->get();
+        $land_plots=UserLandPlot::query()->where('application_id','=',$application->id)->where('certificate','!=','NULL')->get();
+
+        return view('admin.documents.stage_2', compact(['document',
+            'application',
+            'bank_accounts',
+            'users',
+            'creditors_amount',
+            'current_passport',
+            'old_passport',
+            'page',
+            'land_plots'
+        ]));
+    }
+    //================================/STAGE 2 DOCUMENTS================================\\
 
 
 }

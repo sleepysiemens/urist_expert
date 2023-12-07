@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('obligatory_payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('number');
             $table->integer('application_id');
             $table->string('tax_name')->nullable();
             $table->string('arrears')->nullable();

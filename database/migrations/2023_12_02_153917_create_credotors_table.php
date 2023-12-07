@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('credotors', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('number');
             $table->integer('application_id');
             $table->string('name')->nullable();
             $table->string('region')->nullable();

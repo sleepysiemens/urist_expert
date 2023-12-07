@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_children', function (Blueprint $table) {
+        Schema::create('creditor_notifications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('number');
             $table->integer('application_id');
-            $table->string('birth_certificate')->nullable();
+            $table->integer('number');
+            $table->string('certificate')->nullable();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_children');
+        Schema::dropIfExists('creditor_notifications');
     }
 };

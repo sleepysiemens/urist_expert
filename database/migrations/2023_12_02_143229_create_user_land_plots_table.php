@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('user_land_plots', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('number');
             $table->integer('application_id');
             $table->string('certificate')->nullable();
             $table->string('subject')->nullable();

@@ -9,11 +9,11 @@
         <input type="hidden" name="application_id" value="{{$application->id}}">
         <div class="content-top">
             <a href="{{route('admin.main.index')}}" class="content-top-left">
-                <button class="back-btn">
+                <div class="back-btn">
                     <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1L1 10.5L10 20" stroke="#51526C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                </button>
+                </div>
                 <div class="content-top-days">
                     <span>Осталось:</span>
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="content-head">
-            <div class="content-head-item content-head-item-active">
+            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($page==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -57,8 +57,8 @@
                     <span>1 этап</span>
                 </p>
                 <b>Сбор документов</b>
-            </div>
-            <div class="content-head-item">
+            </a>
+            <a href="{{route('admin.documents.stage_2', $application->id)}}" class="content-head-item @if($page==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -69,7 +69,7 @@
                 <b>
                     Претензионная работа / <br>
                     подача в суд</b>
-            </div>
+            </a>
             <div class="content-head-item">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -1231,7 +1231,7 @@
                     <div class="document-input-wrap wrap">
                         <fieldset class="commons-input">
                             <legend>Наименования банка, Адрес</legend>
-                            <input type="number" placeholder="Москва" name="bank_accounts_bank_name_{{$i}}" @if(isset($bank_accounts[$i-1])) value="{{$bank_accounts[$i-1]->bank_name}}" @endif>
+                            <input type="text" placeholder="Москва" name="bank_accounts_bank_name_{{$i}}" @if(isset($bank_accounts[$i-1])) value="{{$bank_accounts[$i-1]->bank_name}}" @endif>
                         </fieldset>
 
                         <fieldset class="commons-input text-input">
@@ -1476,8 +1476,8 @@
             </div>
 
             <div action="" class="document-input-wrap wrap">
-                <label class="commons-btn-blue upload actives mw-209" for="input-file-45">
-                    <input class="input-file" id="input-file-45" type="file" hidden="">
+                <label class="commons-btn-blue upload actives mw-209" for="creditor_notifications_certificate">
+                    <input class="input-file" id="creditor_notifications_certificate" name="creditor_notifications_certificate[]" multiple type="file" hidden="">
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
                     </svg>
@@ -1485,24 +1485,7 @@
                     Доказательство справки
                   </span>
                 </label>
-                <label class="commons-btn-blue upload actives mw-209" for="input-file-46">
-                    <input class="input-file" id="input-file-46" type="file" hidden="">
-                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
-                    </svg>
-                    <span>
-                    Доказательство справки
-                  </span>
-                </label>
-                <label class="commons-btn-blue upload actives mw-209" for="input-file-47">
-                    <input class="input-file" id="input-file-47" type="file" hidden="">
-                    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
-                    </svg>
-                    <span>
-                    Доказательство справки
-                  </span>
-                </label>
+
 
                 <fieldset class="commons-input">
                     <legend>Арбитражный управляющий</legend>
@@ -1524,6 +1507,7 @@
                       Сохранить
                     </span>
                     </button>
+    </form>
                     <label class="commons-btn big mw-209" for="input-file-16">
                         <input class="input-file" id="input-file-16" type="submit" hidden="">
 
@@ -1531,15 +1515,18 @@
                       Выгрузить все документы
                     </span>
                     </label>
-                    <a href="" class="commons-btn big mw-209">
+                    <form action="{{route('admin.documents.second_stage', $application->id)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <button class="commons-btn big mw-209">
                         <span>
                       Следующий этап
                     </span>
-                    </a>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
 @endsection
 
 @section('right_sidebar')
