@@ -8,6 +8,7 @@ class EnterController extends Controller
 {
     public function __invoke()
     {
+
        if((auth()->user()!=NULL) AND (auth()->user()->role == 'admin'))
         {
             return redirect()->route('admin.main.index');

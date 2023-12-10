@@ -3,12 +3,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/show_hide.js')}}"></script>
 
-    <form class="content-wrap" action="{{route('admin.documents.update', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
+    <form class="content-wrap" action="{{route('employee.documents.update', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <input type="hidden" name="application_id" value="{{$application->id}}">
         <div class="content-top">
-            <a href="{{route('admin.main.index')}}" class="content-top-left">
+            <a href="{{route('employee.main.index')}}" class="content-top-left">
                 <div class="back-btn">
                     <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1L1 10.5L10 20" stroke="#51526C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="content-head">
-            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
+            <a href="{{route('employee.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -58,7 +58,7 @@
                 </p>
                 <b>Сбор документов</b>
             </a>
-            <a href="@if($application->stage>1) {{route('admin.documents.inventory', $application->id)}} @endif" class="content-head-item @if($stage==2) content-head-item-active @endif">
+            <a href="@if($application->stage>1) {{route('employee.documents.inventory', $application->id)}} @endif" class="content-head-item @if($stage==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -1911,7 +1911,7 @@
                       Выгрузить все документы
                     </span>
                     </label>
-                    <form action="{{route('admin.documents.second_stage', $application->id)}}" method="post">
+                    <form action="{{route('employee.documents.second_stage', $application->id)}}" method="post">
                         @csrf
                         @method('PATCH')
                         <button class="commons-btn big mw-209">
@@ -1926,7 +1926,7 @@
 @endsection
 
 @section('right_sidebar')
-    <form action="{{route('admin.documents.add_file', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('employee.documents.add_file', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <input type="hidden" name="application_id" value="{{$application->id}}">
@@ -2061,7 +2061,7 @@
             </div>
         </a>
 
-        <a href="{{asset(route('admin.documents.inventory', $application->id))}}">
+        <a href="{{asset(route('employee.documents.inventory', $application->id))}}">
             <p class="left-item-span "><span>Опись имушества</span> <b>
                     {{
                         $document[0]->other_transport_amount+
@@ -2079,10 +2079,10 @@
                     }}
                 </b></p>
         </a>
-        <a href="{{asset(route('admin.documents.creditors', $application->id))}}">
+        <a href="{{asset(route('employee.documents.creditors', $application->id))}}">
             <p class="left-item-span "><span>Список кредиторов</span> <b>{{$document[0]->creditors_amount}}</b></p>
         </a>
-        <a href="{{asset(route('admin.documents.bfl', $application->id))}}">
+        <a href="{{asset(route('employee.documents.bfl', $application->id))}}">
             <p class="left-item-span "><span>Заявление БФЛ</span> <b>1</b></p>
         </a>
 

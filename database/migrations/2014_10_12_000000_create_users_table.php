@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\User;
+
+
 return new class extends Migration
 {
     /**
@@ -22,6 +25,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('role')->default('user');
         });
+
+        User::create(['name'=>'admin','email'=>'admin@admin.com', 'password'=>'$2y$12$YL6J7NrcBoelbrKWb8TUA.BqzHpUWE2ZCyD.nTlUyIFtVE.zCycFi', 'phone'=>'admin', 'role'=>'admin']);
     }
 
     /**

@@ -48,11 +48,8 @@ class User extends Authenticatable
     //
     public function getRedirectRoute()
     {
-        return match((string)$this->role) {
-            'user' => route('user.main.index'),
-            'employee' => route('employee.main.index'),
-            'admin' => route('admin.main.index'),
-        };
+        dd('user');
+        //return redirect()->route('enter.index');
     }
     //
 }

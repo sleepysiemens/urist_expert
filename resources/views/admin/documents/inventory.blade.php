@@ -45,7 +45,7 @@
         </div>
 
         <div class="content-head">
-            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($page==1) content-head-item-active @endif ">
+            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -55,7 +55,7 @@
                 </p>
                 <b>Сбор документов</b>
             </a>
-            <a href="{{route('admin.documents.stage_2', $application->id)}}" class="content-head-item @if($page==2) content-head-item-active @endif">
+            <a href="{{route('admin.documents.inventory', $application->id)}}" class="content-head-item @if($stage==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -251,12 +251,11 @@
                 <tr>
                     <td>Улица (проспект, переулок и так далее)</td>
                     <td class="two-cols">при наличии</td>
-                    <td>Кисловодская</td>
+                    <td>{{$document[0]->street}}</td>
                 </tr>
                 <tr>
                     <td>Номер дома (владения)</td>
                     <td class="two-cols">{{$document[0]->house}}</td>
-                    <td>31</td>
                 </tr>
                 <tr>
                     <td>Номер корпуса (строения)</td>
@@ -331,68 +330,356 @@
                         @else
                             @php $i=1; @endphp
                             @foreach($land_plots as $land_plot)
-                                {{$i.') '.$land_plot->number}}
+                                {{$i.') '}}
+                                @if(isset($land_plot->name)){{$land_plot->name}}@endif
+                            <br>
                                 @php $i++ @endphp
                             @endforeach
                         @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($land_plots->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($land_plots as $land_plot)
+                                {{$i.') '}}
+                                @if(isset($land_plot->type)){{$land_plot->type}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($land_plots->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($land_plots as $land_plot)
+                                {{$i.') '}}
+                                @if(isset($land_plot->address)){{$land_plot->address}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($land_plots->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($land_plots as $land_plot)
+                                {{$i.') '}}
+                                @if(isset($land_plot->square)){{$land_plot->square}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($land_plots->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($land_plots as $land_plot)
+                                {{$i.') '}}
+                                @if(isset($land_plot->cost)){{$land_plot->cost}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($land_plots->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($land_plots as $land_plot)
+                                {{$i.') '}}
+                                @if(isset($land_plot->deposit)){{$land_plot->deposit}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">1.2</td>
                     <td class="start normal-1">
                         Жилые дома, дачи: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($residential_houses->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->name)){{$residential_house->name}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($residential_houses->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->type)){{$residential_house->type}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($residential_houses->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->address)){{$residential_house->address}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($residential_houses->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->square)){{$residential_house->square}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($residential_houses->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->cost)){{$residential_house->cost}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($residential_houses->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($residential_houses as $residential_house)
+                                {{$i.') '}}
+                                @if(isset($residential_house->deposit)){{$residential_house->deposit}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">1.3</td>
                     <td class="start normal-1">
                         Квартиры: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($flats->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->name)){{$flat->name}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($flats->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->type)){{$flat->type}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($flats->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->address)){{$flat->address}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($flats->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->square)){{$flat->square}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($flats->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->cost)){{$flat->cost}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($flats->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($flats as $flat)
+                                {{$i.') '}}
+                                @if(isset($flat->deposit)){{$flat->deposit}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">1.4</td>
                     <td class="start normal-1">
                         Гаражи: <br>
-                        1 ) Не имеется <br>
-                        2 )
+                        @if($garages->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->name)){{$garage->name}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($garages->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->type)){{$garage->type}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($garages->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->address)){{$garage->address}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($garages->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->square)){{$garage->square}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($garages->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->cost)){{$garage->cost}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($garages->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($garages as $garage)
+                                {{$i.') '}}
+                                @if(isset($garage->deposit)){{$garage->deposit}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">1.5</td>
                     <td class="start normal-1">
                         Иное недвижимое имущество: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($another_estates->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->name)){{$another_estate->name}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($another_estates->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->type)){{$another_estate->type}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($another_estates->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->address)){{$another_estate->address}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($another_estates->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->square)){{$another_estate->square}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($another_estates->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->cost)){{$another_estate->cost}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($another_estates->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($another_estates as $another_estate)
+                                {{$i.') '}}
+                                @if(isset($another_estate->deposit)){{$another_estate->deposit}}@endif
+                                <br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
             </table>
 
@@ -440,93 +727,464 @@
                     <td class="number">2.1</td>
                     <td class="start normal-1">
                         Автомобили легковые: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($cars->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->id_number)){{$car->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($cars->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->id_number)){{$car->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cars->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->type)){{$car->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cars->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->address)){{$car->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cars->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->cost)){{$car->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cars->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cars as $car)
+                                {{$i.') '}}
+                                @if(isset($car->deposit)){{$car->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.2</td>
                     <td class="start normal-1">
                         Автомобили грузовые: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($cargo_vehicles->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->id_number)){{$cargo_vehicle->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($cargo_vehicles->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->id_number)){{$cargo_vehicle->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cargo_vehicles->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->type)){{$cargo_vehicle->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cargo_vehicles->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->address)){{$cargo_vehicle->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cargo_vehicles->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->cost)){{$cargo_vehicle->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($cargo_vehicles->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($cargo_vehicles as $cargo_vehicle)
+                                {{$i.') '}}
+                                @if(isset($cargo_vehicle->deposit)){{$cargo_vehicle->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.3</td>
                     <td class="start normal-1">
                         Мототранспортные средства: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($motorized_transports->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->id_number)){{$motorized_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td></td>
+                    <td class="normal-1">
+                        @if($motorized_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->id_number)){{$motorized_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($motorized_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->type)){{$motorized_transport->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($motorized_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->address)){{$motorized_transport->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($motorized_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->cost)){{$motorized_transport->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($motorized_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($motorized_transports as $motorized_transport)
+                                {{$i.') '}}
+                                @if(isset($motorized_transport->deposit)){{$motorized_transport->deposit}}@endif<br>
+
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.4</td>
                     <td class="start normal-1">
-                        Сельско­хозяйствен­ная техника: <br>
-                        1) Не имеется <br>
-                        2)
+                        Сельскохозяйственная техника: <br>
+                        @if($agricultural_techiques->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->id_number)){{$agricultural_techique->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($agricultural_techiques->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->id_number)){{$agricultural_techique->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($agricultural_techiques->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->type)){{$agricultural_techique->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($agricultural_techiques->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->address)){{$agricultural_techique->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($agricultural_techiques->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->cost)){{$agricultural_techique->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($agricultural_techiques->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($agricultural_techiques as $agricultural_techique)
+                                {{$i.') '}}
+                                @if(isset($agricultural_techique->deposit)){{$agricultural_techique->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.5</td>
                     <td class="start normal-1">
                         Водный транспорт: <br>
-                        1) Не имеется <br>
-                        2)
+                        @if($water_transports->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->id_number)){{$water_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($water_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->id_number)){{$water_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($water_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->type)){{$water_transport->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($water_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->address)){{$water_transport->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($water_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->cost)){{$water_transport->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($water_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($water_transports as $water_transport)
+                                {{$i.') '}}
+                                @if(isset($water_transport->deposit)){{$water_transport->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.6</td>
                     <td class="start normal-1">
-                        Воздушный транспорт <br>
-                        1) Не имеется <br>
-                        2)
+                        Воздушный транспорт: <br>
+                        @if($air_transports->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->id_number)){{$air_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($air_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->id_number)){{$air_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($air_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->type)){{$air_transport->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($air_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->address)){{$air_transport->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($air_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->cost)){{$air_transport->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($air_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($air_transports as $air_transport)
+                                {{$i.') '}}
+                                @if(isset($air_transport->deposit)){{$air_transport->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td class="number">2.7</td>
                     <td class="start normal-1">
-                        Иные транспортные средства: <br>
-                        1) Не имеется <br>
-                        2)
+                        Иные транспортные средства:<br>
+                        @if($other_transports->count()==0)
+                            1) Не имеется
+                        @else
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->id_number)){{$other_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
                     </td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
-                    <td class="normal-1"></td>
+                    <td class="normal-1">
+                        @if($other_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->id_number)){{$other_transport->id_number}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($other_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->type)){{$other_transport->type}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($other_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->address)){{$other_transport->address}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($other_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->cost)){{$other_transport->cost}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
+                    <td class="normal-1">
+                        @if($other_transports->count()!=0)
+                            @php $i=1; @endphp
+                            @foreach($other_transports as $other_transport)
+                                {{$i.') '}}
+                                @if(isset($other_transport->deposit)){{$other_transport->deposit}}@endif<br>
+                                @php $i++ @endphp
+                            @endforeach
+                        @endif
+                    </td>
                 </tr>
             </table>
 
@@ -555,17 +1213,26 @@
                         Остаток на счете <sup>11</sup> (руб.)
                     </td>
                 </tr>
-                @php $i=1 @endphp
-                @foreach($bank_accounts as $bank_account)
-                    <tr>
-                        <td class="number">3.{{$i}}</td>
-                        <td class="normal" colspan="">{{$bank_account->bank_name}}</td>
-                        <td class="size-2" colspan="">{{$bank_account->kind_of_account}}</td>
-                        <td class="size-2" colspan="">{{$bank_account->creation_date}}</td>
-                        <td class="size-2" colspan="">{{$bank_account->bank_account_rest}}</td>
-                    </tr>
-                    @php $i++ @endphp
-                @endforeach
+                @if($bank_accounts->count()==0)
+                    <td class="number">3.1</td>
+                    <td class="normal" colspan="">Не имеется</td>
+                    <td class="size-2" colspan=""></td>
+                    <td class="size-2" colspan=""></td>
+                    <td class="size-2" colspan=""></td>
+                    @else
+                    @php $i=1 @endphp
+                    @foreach($bank_accounts as $bank_account)
+                        <tr>
+                            <td class="number">3.{{$i}}</td>
+                            <td class="normal" colspan="">{{$bank_account->bank_name}}</td>
+                            <td class="size-2" colspan="">{{$bank_account->kind_of_account}}</td>
+                            <td class="size-2" colspan="">{{$bank_account->creation_date}}</td>
+                            <td class="size-2" colspan="">{{$bank_account->bank_account_rest}}</td>
+                        </tr>
+                        @php $i++ @endphp
+                    @endforeach
+                @endif
+
             </table>
 
             <table class="real-estate">
@@ -931,4 +1598,77 @@
         </div>
     </div>
 
+@endsection
+
+@section('left-sidebar')
+    <a href="document.html">
+        <div class="left-item sidebar-item left-item-document">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M4.5835 3.66683H17.4168C17.9231 3.66683 18.3335 4.07723 18.3335 4.5835V17.4168C18.3335 17.9231 17.9231 18.3335 17.4168 18.3335H4.5835C4.07724 18.3335 3.66683 17.9231 3.66683 17.4168V4.5835C3.66683 4.07724 4.07723 3.66683 4.5835 3.66683ZM1.8335 4.5835C1.8335 3.06472 3.06472 1.8335 4.5835 1.8335H17.4168C18.9357 1.8335 20.1668 3.06472 20.1668 4.5835V17.4168C20.1668 18.9357 18.9357 20.1668 17.4168 20.1668H4.5835C3.06472 20.1668 1.8335 18.9357 1.8335 17.4168V4.5835Z"
+                      fill="#8F92A1" />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M10.9998 11C8.46854 11 6.4165 8.53757 6.4165 5.5H8.24984C8.24984 7.85222 9.77985 9.16667 10.9998 9.16667C12.2198 9.16667 13.7498 7.85222 13.7498 5.5H15.5832C15.5832 8.53757 13.5311 11 10.9998 11Z"
+                      fill="#8F92A1" />
+            </svg>
+            <span>Документы</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M12.291 6.70743C12.9214 6.07759 12.4754 5 11.5842 5H4.41268C3.52199 5 3.07572 6.07669 3.70525 6.70679L7.28781 10.2926C7.67815 10.6833 8.31132 10.6836 8.70202 10.2932L12.291 6.70743Z"
+                      fill="#8F92A1" fill-opacity="0.4" />
+            </svg>
+        </div>
+    </a>
+
+    <a href="{{asset(route('admin.documents.inventory', $application->id))}}">
+        <p class="left-item-span active"><span>Опись имушества</span> <b>
+                {{
+                    $document[0]->other_transport_amount+
+                    $document[0]->air_transport_amount+
+                    $document[0]->water_transport_amount+
+                    $document[0]->agricultural_technique_amount+
+                    $document[0]->motorized_transport_amount+
+                    $document[0]->cargo_vehicles_amount+
+                    $document[0]->cars_amount+
+                    $document[0]->another_estate_amount+
+                    $document[0]->garages_amount+
+                    $document[0]->flats_amount+
+                    $document[0]->residential_houses_amount+
+                    $document[0]->land_plot_amount
+                }}
+            </b></p>
+    </a>
+    <a href="{{asset(route('admin.documents.creditors', $application->id))}}">
+        <p class="left-item-span "><span>Список кредиторов</span> <b>{{$document[0]->creditors_amount}}</b></p>
+    </a>
+    <a href="{{asset(route('admin.documents.bfl', $application->id))}}">
+        <p class="left-item-span "><span>Заявление БФЛ</span> <b>1</b></p>
+    </a>
+
+    <a href="#">
+        <div class="left-item left-item-stroke sidebar-item">
+            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.31006 13.7002L8.81006 15.2002L12.8101 11.2002" stroke="#8F92A1" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 5H12C14 5 14 4 14 3C14 1 13 1 12 1H8C7 1 6 1 6 3C6 5 7 5 8 5Z" stroke="#8F92A1"
+                      stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M14 3.02002C17.33 3.20002 19 4.43002 19 9.00002V15C19 19 18 21 13 21H7C2 21 1 19 1 15V9.00002C1 4.44002 2.67 3.20002 6 3.02002"
+                    stroke="#8F92A1" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <span>Процедура</span>
+        </div>
+    </a>
+
+    <a href="#">
+        <div class="left-item sidebar-item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M6.85714 16.2783H3.42857V18H1.71429V16.2783H0.857143C0.629814 16.2783 0.411797 16.1876 0.251051 16.0262C0.0903058 15.8647 0 15.6458 0 15.4175V2.50485C0 2.27654 0.0903058 2.05758 0.251051 1.89614C0.411797 1.7347 0.629814 1.64401 0.857143 1.64401H6.85714V0.430223C6.85717 0.367743 6.87074 0.306019 6.89692 0.249337C6.92309 0.192656 6.96124 0.142377 7.00871 0.101993C7.05618 0.0616094 7.11183 0.0320887 7.1718 0.0154821C7.23178 -0.00112452 7.29463 -0.00441888 7.356 0.00582779L16.4263 1.52435C16.6264 1.55777 16.8083 1.66141 16.9395 1.81683C17.0707 1.97225 17.1428 2.16938 17.1429 2.37314V4.22653H18V5.94822H17.1429V11.9741H18V13.6958H17.1429V15.5492C17.1428 15.7529 17.0707 15.9501 16.9395 16.1055C16.8083 16.2609 16.6264 16.3646 16.4263 16.398L15.4286 16.565V18H13.7143V16.8525L7.356 17.9165C7.29463 17.9267 7.23178 17.9235 7.1718 17.9068C7.11183 17.8902 7.05618 17.8607 7.00871 17.8203C6.96124 17.7799 6.92309 17.7297 6.89692 17.673C6.87074 17.6163 6.85717 17.5546 6.85714 17.4921V16.2783ZM8.57143 15.9684L15.4286 14.8201V3.10227L8.57143 1.95477V15.9676V15.9684ZM12.4286 11.1133C11.7189 11.1133 11.1429 10.1491 11.1429 8.96116C11.1429 7.7732 11.7189 6.80906 12.4286 6.80906C13.1383 6.80906 13.7143 7.7732 13.7143 8.96116C13.7143 10.1491 13.1383 11.1133 12.4286 11.1133Z"
+                    fill="#8F92A1" />
+            </svg>
+            <span>Кредиторы</span>
+        </div>
+    </a>
 @endsection

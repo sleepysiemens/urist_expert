@@ -96,10 +96,13 @@ return new class extends Migration
             $table->integer('garages_amount')->nullable();
             //another
             $table->boolean('have_another_estate')->nullable();
-            $table->integer('garages_another_estate')->nullable();
+            $table->integer('another_estate_amount')->nullable();
 
             //movable property
             $table->string('movable_property_egrn')->nullable();
+            //cargo_vehicles
+            $table->boolean('have_cars')->nullable();
+            $table->integer('cars_amount')->nullable();
             //cargo_vehicles
             $table->boolean('have_cargo_vehicles')->nullable();
             $table->integer('cargo_vehicles_amount')->nullable();

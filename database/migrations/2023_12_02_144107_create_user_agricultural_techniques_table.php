@@ -14,15 +14,14 @@ return new class extends Migration
         Schema::create('user_agricultural_techniques', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('number');
             $table->integer('application_id');
+            $table->string('number')->nullable();
+            $table->string('id_number')->nullable();
+            $table->string('type')->nullable();
+            $table->string('address')->nullable();
+            $table->string('cost')->nullable();
+            $table->string('deposit')->nullable();
             $table->string('pts')->nullable();
-            $table->string('subject')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
-            $table->string('locality')->nullable();
-            $table->string('house')->nullable();
-            $table->string('flat')->nullable();
         });
     }
 

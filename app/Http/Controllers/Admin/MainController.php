@@ -16,8 +16,7 @@ class MainController extends Controller
         $applications=Application::all();
         $employees=User::query()->where('role','=','employee')->get();
         $users=User::query()->where('role','=','user')->get();
-        $creditors_amount=Credotor::count();
 
-        return view('admin.index', compact(['applications', 'employees', 'users', 'creditors_amount']));
+        return view('admin.index', compact(['applications', 'employees', 'users']));
     }
 }

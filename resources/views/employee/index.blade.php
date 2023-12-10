@@ -1,165 +1,12 @@
 @extends('Layouts.EmployeeWrapper')
 @section('content')
 
-        <div class="container">
-
-            <!-- left sidebar index -->
-            <div class="left-sidebar">
-                <a href="index.html">
-                    <div class="left-item sidebar-item active">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M7 3C9.20914 3 11 4.79086 11 7C11 9.20914 9.20914 11 7 11C4.79086 11 3 9.20914 3 7C3 4.79086 4.79086 3 7 3ZM7 5C5.89543 5 5 5.89543 5 7C5 8.10457 5.89543 9 7 9C8.10457 9 9 8.10457 9 7C9 5.89543 8.10457 5 7 5ZM17 3C19.2091 3 21 4.79086 21 7C21 9.20914 19.2091 11 17 11C14.7909 11 13 9.20914 13 7C13 4.79086 14.7909 3 17 3ZM17 5C15.8954 5 15 5.89543 15 7C15 8.10457 15.8954 9 17 9C18.1046 9 19 8.10457 19 7C19 5.89543 18.1046 5 17 5ZM11 17C11 14.7909 9.20914 13 7 13C4.79086 13 3 14.7909 3 17C3 19.2091 4.79086 21 7 21C9.20914 21 11 19.2091 11 17ZM5 17C5 15.8954 5.89543 15 7 15C8.10457 15 9 15.8954 9 17C9 18.1046 8.10457 19 7 19C5.89543 19 5 18.1046 5 17ZM17 13C19.2091 13 21 14.7909 21 17C21 19.2091 19.2091 21 17 21C14.7909 21 13 19.2091 13 17C13 14.7909 14.7909 13 17 13ZM17 15C15.8954 15 15 15.8954 15 17C15 18.1046 15.8954 19 17 19C18.1046 19 19 18.1046 19 17C19 15.8954 18.1046 15 17 15Z"
-                                  fill="#8F92A1" />
-                        </svg>
-                        <span>Главная</span>
-                    </div>
-                </a>
-                <div class="left-item left-item-stroke sidebar-item left-item-klent">
-                    <a href="klient.html">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.5001 5.37C13.4551 5.3625 13.4026 5.3625 13.3576 5.37C12.3226 5.3325 11.4976 4.485 11.4976 3.435C11.4976 2.3625 12.3601 1.5 13.4326 1.5C14.5051 1.5 15.3676 2.37 15.3676 3.435C15.3601 4.485 14.5351 5.3325 13.5001 5.37Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M12.7276 10.8301C13.7551 11.0026 14.8876 10.8226 15.6826 10.2901C16.7401 9.58512 16.7401 8.43012 15.6826 7.72512C14.8801 7.19262 13.7326 7.01262 12.7051 7.19262"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M4.47736 5.37C4.52236 5.3625 4.57486 5.3625 4.61986 5.37C5.65486 5.3325 6.47986 4.485 6.47986 3.435C6.47986 2.3625 5.61736 1.5 4.54486 1.5C3.47236 1.5 2.60986 2.37 2.60986 3.435C2.61736 4.485 3.44236 5.3325 4.47736 5.37Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M5.25008 10.8301C4.22258 11.0026 3.09008 10.8226 2.29508 10.2901C1.23758 9.58512 1.23758 8.43012 2.29508 7.72512C3.09758 7.19262 4.24508 7.01262 5.27258 7.19262"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M9.00006 10.9725C8.95506 10.965 8.90256 10.965 8.85756 10.9725C7.82256 10.935 6.99756 10.0875 6.99756 9.03754C6.99756 7.96504 7.86006 7.10254 8.93256 7.10254C10.0051 7.10254 10.8676 7.97254 10.8676 9.03754C10.8601 10.0875 10.0351 10.9425 9.00006 10.9725Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M6.81754 13.335C5.76004 14.04 5.76004 15.195 6.81754 15.9C8.01754 16.7025 9.98254 16.7025 11.1825 15.9C12.24 15.195 12.24 14.04 11.1825 13.335C9.99004 12.54 8.01754 12.54 6.81754 13.335Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Лиды</span>
-                    </a>
-                </div>
-                <div class="left-item-search">
-                    <input type="text" placeholder="Поиск..." id="1">
-                    <label for="1">
-                        <img src="images/icons/left-side-3.svg" alt="">
-                    </label>
-                </div>
-
-                <a href="date.html">
-                    <p class="left-item-p">+79914221142312</p>
-                </a>
-                <a href="date.html">
-                    <p class="left-item-p">+79914221142312</p>
-                </a>
-                <a href="shablon.html">
-                    <p class="left-item-p">+79914221142312</p>
-                </a>
-                <div class="left-item left-item-stroke sidebar-item left-item-klent">
-                    <a href="klient.html">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.5001 5.37C13.4551 5.3625 13.4026 5.3625 13.3576 5.37C12.3226 5.3325 11.4976 4.485 11.4976 3.435C11.4976 2.3625 12.3601 1.5 13.4326 1.5C14.5051 1.5 15.3676 2.37 15.3676 3.435C15.3601 4.485 14.5351 5.3325 13.5001 5.37Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M12.7276 10.8301C13.7551 11.0026 14.8876 10.8226 15.6826 10.2901C16.7401 9.58512 16.7401 8.43012 15.6826 7.72512C14.8801 7.19262 13.7326 7.01262 12.7051 7.19262"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M4.47736 5.37C4.52236 5.3625 4.57486 5.3625 4.61986 5.37C5.65486 5.3325 6.47986 4.485 6.47986 3.435C6.47986 2.3625 5.61736 1.5 4.54486 1.5C3.47236 1.5 2.60986 2.37 2.60986 3.435C2.61736 4.485 3.44236 5.3325 4.47736 5.37Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M5.25008 10.8301C4.22258 11.0026 3.09008 10.8226 2.29508 10.2901C1.23758 9.58512 1.23758 8.43012 2.29508 7.72512C3.09758 7.19262 4.24508 7.01262 5.27258 7.19262"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M9.00006 10.9725C8.95506 10.965 8.90256 10.965 8.85756 10.9725C7.82256 10.935 6.99756 10.0875 6.99756 9.03754C6.99756 7.96504 7.86006 7.10254 8.93256 7.10254C10.0051 7.10254 10.8676 7.97254 10.8676 9.03754C10.8601 10.0875 10.0351 10.9425 9.00006 10.9725Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M6.81754 13.335C5.76004 14.04 5.76004 15.195 6.81754 15.9C8.01754 16.7025 9.98254 16.7025 11.1825 15.9C12.24 15.195 12.24 14.04 11.1825 13.335C9.99004 12.54 8.01754 12.54 6.81754 13.335Z"
-                                stroke="#8F92A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Клиенты</span>
-                    </a>
-                </div>
-                <div class="left-item-search">
-                    <input type="text" placeholder="Поиск..." id="1">
-                    <label for="1">
-                        <img src="images/icons/left-side-3.svg" alt="">
-                    </label>
-                </div>
-
-                <a href="date.html">
-                    <p class="left-item-p">Иванов М.Е</p>
-                </a>
-                <a href="date.html">
-                    <p class="left-item-p">Иванов М.Е</p>
-                </a>
-                <a href="shablon.html">
-                    <p class="left-item-p">Иванов М.Е</p>
-                </a>
-
-                <a href="document.html">
-                    <div class="left-item sidebar-item left-item-document">
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M4.5835 3.66683H17.4168C17.9231 3.66683 18.3335 4.07723 18.3335 4.5835V17.4168C18.3335 17.9231 17.9231 18.3335 17.4168 18.3335H4.5835C4.07724 18.3335 3.66683 17.9231 3.66683 17.4168V4.5835C3.66683 4.07724 4.07723 3.66683 4.5835 3.66683ZM1.8335 4.5835C1.8335 3.06472 3.06472 1.8335 4.5835 1.8335H17.4168C18.9357 1.8335 20.1668 3.06472 20.1668 4.5835V17.4168C20.1668 18.9357 18.9357 20.1668 17.4168 20.1668H4.5835C3.06472 20.1668 1.8335 18.9357 1.8335 17.4168V4.5835Z"
-                                  fill="#8F92A1" />
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M10.9998 11C8.46854 11 6.4165 8.53757 6.4165 5.5H8.24984C8.24984 7.85222 9.77985 9.16667 10.9998 9.16667C12.2198 9.16667 13.7498 7.85222 13.7498 5.5H15.5832C15.5832 8.53757 13.5311 11 10.9998 11Z"
-                                  fill="#8F92A1" />
-                        </svg>
-                        <span>Документы</span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                  d="M12.291 6.70743C12.9214 6.07759 12.4754 5 11.5842 5H4.41268C3.52199 5 3.07572 6.07669 3.70525 6.70679L7.28781 10.2926C7.67815 10.6833 8.31132 10.6836 8.70202 10.2932L12.291 6.70743Z"
-                                  fill="#8F92A1" fill-opacity="0.4" />
-                        </svg>
-                    </div>
-                </a>
-
-                <a href="inventory.html">
-                    <p class="left-item-span "><span>Опись имушества</span> <b>254</b></p>
-                </a>
-                <a href="list.html">
-                    <p class="left-item-span "><span>Список кредиторов</span> <b>4</b></p>
-                </a>
-                <a href="glavnie.html">
-                    <p class="left-item-span "><span>Заявление БФЛ</span> <b>4</b></p>
-                </a>
-
-                <a href="#">
-                    <div class="left-item left-item-stroke sidebar-item">
-                        <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.31006 13.7002L8.81006 15.2002L12.8101 11.2002" stroke="#8F92A1" stroke-width="2"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8 5H12C14 5 14 4 14 3C14 1 13 1 12 1H8C7 1 6 1 6 3C6 5 7 5 8 5Z" stroke="#8F92A1"
-                                  stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M14 3.02002C17.33 3.20002 19 4.43002 19 9.00002V15C19 19 18 21 13 21H7C2 21 1 19 1 15V9.00002C1 4.44002 2.67 3.20002 6 3.02002"
-                                stroke="#8F92A1" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <span>Процедура</span>
-                    </div>
-                </a>
-
-                <a href="#">
-                    <div class="left-item sidebar-item">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M6.85714 16.2783H3.42857V18H1.71429V16.2783H0.857143C0.629814 16.2783 0.411797 16.1876 0.251051 16.0262C0.0903058 15.8647 0 15.6458 0 15.4175V2.50485C0 2.27654 0.0903058 2.05758 0.251051 1.89614C0.411797 1.7347 0.629814 1.64401 0.857143 1.64401H6.85714V0.430223C6.85717 0.367743 6.87074 0.306019 6.89692 0.249337C6.92309 0.192656 6.96124 0.142377 7.00871 0.101993C7.05618 0.0616094 7.11183 0.0320887 7.1718 0.0154821C7.23178 -0.00112452 7.29463 -0.00441888 7.356 0.00582779L16.4263 1.52435C16.6264 1.55777 16.8083 1.66141 16.9395 1.81683C17.0707 1.97225 17.1428 2.16938 17.1429 2.37314V4.22653H18V5.94822H17.1429V11.9741H18V13.6958H17.1429V15.5492C17.1428 15.7529 17.0707 15.9501 16.9395 16.1055C16.8083 16.2609 16.6264 16.3646 16.4263 16.398L15.4286 16.565V18H13.7143V16.8525L7.356 17.9165C7.29463 17.9267 7.23178 17.9235 7.1718 17.9068C7.11183 17.8902 7.05618 17.8607 7.00871 17.8203C6.96124 17.7799 6.92309 17.7297 6.89692 17.673C6.87074 17.6163 6.85717 17.5546 6.85714 17.4921V16.2783ZM8.57143 15.9684L15.4286 14.8201V3.10227L8.57143 1.95477V15.9676V15.9684ZM12.4286 11.1133C11.7189 11.1133 11.1429 10.1491 11.1429 8.96116C11.1429 7.7732 11.7189 6.80906 12.4286 6.80906C13.1383 6.80906 13.7143 7.7732 13.7143 8.96116C13.7143 10.1491 13.1383 11.1133 12.4286 11.1133Z"
-                                fill="#8F92A1" />
-                        </svg>
-                        <span>Кредиторы</span>
-                    </div>
-                </a>
-            </div>
-
             <div class="glavni-sec">
 
                 <h4 class="title">Клиенты</h4>
 
                 <div class="etap-wrap">
+                    <!--0-->
                     <div class="etap-section">
                         <div class="etap-card">
                             <div class="title">
@@ -171,50 +18,87 @@
                             </div>
                             <div class="etap-card-title">Регистрация</div>
                         </div>
-                        <div class="etap-user-card">
-                            <div class="register-card">
-                                <div class="register-card-user">
-                                    <img src="./images/reg-img.png" alt="">
-                                    <button class="commons-btn">Добавить клиента</button>
-                                </div>
-                                <div class="register-card-content">
-                                    <div class="register-card-info">
-                                        <span class="register-card-title">Дата регистрации:</span>
-                                        <span class="register-card-text">27.06.2023</span>
-                                    </div>
-                                    <div class="register-card-info">
-                                        <span class="register-card-title">Номер телефона:</span>
-                                        <span class="register-card-text">+79914221142312</span>
-                                    </div>
-                                </div>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
 
-                                            Удалить</button>
+                        @foreach($applications as $application)
+
+                            @if($application->stage == 0)
+
+                                <div class="etap-user-card">
+                                    <div class="register-card">
+                                        <div class="register-card-user">
+                                            <img src="{{asset('images/reg-img.png')}}" alt="">
+                                            <a href="{{ route('employee.documents.create', $application->id) }}" class="commons-btn">Добавить клиента</a>
+                                        </div>
+                                        <div class="register-card-content">
+                                            <div class="register-card-info">
+                                                <span class="register-card-title">Дата регистрации:</span>
+                                                <span class="register-card-text">{{date("d.m.Y",strtotime($application->created_at))}}</span>
+                                            </div>
+                                            <div class="register-card-info">
+                                                <span class="register-card-title">Номер телефона:</span>
+                                                <span class="register-card-text">{{$application->phone}}</span>
+                                            </div>
+                                            @if($application->employee_id!==NULL)
+                                                <div class="register-card-info">
+                                                    <span class="register-card-title">Сотрудник:</span>
+                                                    <span class="register-card-text">
+                                                        @foreach($employees as $employee)
+                                                            @if($employee->id==$application->employee_id)
+                                                                {{$employee->name}}
+                                                            @endif
+                                                        @endforeach
+                                                    </span>
+                                                </div>
+                                            @endif
+
+                                        </div>
+                                        <div class="card-tooltip">
+                                            <button class="card-tooltip-btn">
+                                                <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                </svg>
+                                            </button>
+                                            @if(auth()->user()->role=='admin')
+                                                <div class="card-tooltip-content">
+                                                    <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Дублировать</button>
+                                                    <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Удалить</button>
+
+                                                    <a href="{{route('employee.application.add_employee', $application->id)}}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Назначить сотрудника
+                                                    </a>
+
+                                                </div>
+
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                <br>
+                            @endif
+
+
+                        @endforeach
+
                     </div>
+                    <!--/0-->
+
+                    <!--1-->
                     <div class="etap-section">
                         <div class="etap-card">
                             <div class="title">
@@ -227,99 +111,61 @@
                             </div>
                             <div class="etap-card-title">Сбор документов</div>
                         </div>
-                        <div class="etap-user-card">
-                            <div class="cabinitet-card">
-                                <img src="images/user-1.png" alt="">
-                                <form action="" class="cabinitet-form">
-                                    <fieldset class="commons-input">
-                                        <legend>И.Ф.О</legend>
-                                        <input type="text" placeholder="Петров И. С.">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Контакты</legend>
-                                        <input type="text" placeholder="+79914221142312">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Электронная почта</legend>
-                                        <input type="text" placeholder="p@gmail.com">
-                                    </fieldset>
-                                    <button class="content-bnt commons-btn">
-                                        Выгрузить все документы
-                                    </button>
-                                </form>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                        @foreach($applications as $application)
+                            @if($application->stage == 1)
+                                <a href="{{route('employee.documents.edit', $application->id)}}" class="etap-user-card">
+                                    <div class="cabinitet-card">
+                                        <img src="{{asset('images/user-1.png')}}" alt="">
+                                        <form action="" class="cabinitet-form">
+                                            <fieldset class="commons-input">
+                                                <legend>И.Ф.О</legend>
+                                                <input type="text" disabled value="{{$application->fio}}">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Контакты</legend>
+                                                <input type="text" value="{{$application->phone}}">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Электронная почта</legend>
+                                                <input type="text" value="{{$application->email}}">
+                                            </fieldset>
+                                            <button class="content-bnt commons-btn">
+                                                Выгрузить все документы
+                                            </button>
+                                        </form>
+                                        <div class="card-tooltip">
+                                            <button class="card-tooltip-btn">
+                                                <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                </svg>
+                                            </button>
+                                            <div class="card-tooltip-content">
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    Дублировать</button>
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
 
-                                            Удалить</button>
+                                                    Удалить</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="cabinitet-card">
-                                <img src="images/user-1.png" alt="">
-                                <form action="" class="cabinitet-form">
-                                    <fieldset class="commons-input">
-                                        <legend>И.Ф.О</legend>
-                                        <input type="text" placeholder="Петров И. С.">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Контакты</legend>
-                                        <input type="text" placeholder="+79914221142312">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Электронная почта</legend>
-                                        <input type="text" placeholder="p@gmail.com">
-                                    </fieldset>
-                                    <button class="content-bnt commons-btn">
-                                        Выгрузить все документы
-                                    </button>
-                                </form>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-
-                                            Удалить</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </a>
+                                <br>
+                            @endif
+                        @endforeach
                     </div>
+                    <!--/1-->
+                    <!--2-->
                     <div class="etap-section">
                         <div class="etap-card">
                             <div class="title">
@@ -337,143 +183,63 @@
 
                         </div>
                         <div class="etap-user-card">
-                            <div class="cabinitet-card">
-                                <img src="images/user-1.png" alt="">
-                                <form action="" class="cabinitet-form">
-                                    <fieldset class="commons-input">
-                                        <legend>И.Ф.О</legend>
-                                        <input type="text" placeholder="Петров И. С.">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Контакты</legend>
-                                        <input type="text" placeholder="+79914221142312">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Электронная почта</legend>
-                                        <input type="text" placeholder="p@gmail.com">
-                                    </fieldset>
-                                    <button class="content-bnt commons-btn">
-                                        Выгрузить все документы
-                                    </button>
-                                </form>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
 
-                                            Удалить</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cabinitet-card">
-                                <img src="images/user-1.png" alt="">
-                                <form action="" class="cabinitet-form">
-                                    <fieldset class="commons-input">
-                                        <legend>И.Ф.О</legend>
-                                        <input type="text" placeholder="Петров И. С.">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Контакты</legend>
-                                        <input type="text" placeholder="+79914221142312">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Электронная почта</legend>
-                                        <input type="text" placeholder="p@gmail.com">
-                                    </fieldset>
-                                    <button class="content-bnt commons-btn">
-                                        Выгрузить все документы
-                                    </button>
-                                </form>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                        @foreach($applications as $application)
+                            @if($application->stage == 2)
+                                    <a href="{{route('employee.documents.inventory', $application->id)}}" class="etap-user-card">
+                                        <div class="cabinitet-card">
+                                            <img src="{{asset('images/user-1.png')}}" alt="">
+                                            <form action="" class="cabinitet-form">
+                                                <fieldset class="commons-input">
+                                                    <legend>И.Ф.О</legend>
+                                                    <input type="text" disabled value="{{$application->fio}}">
+                                                </fieldset>
+                                                <fieldset class="commons-input">
+                                                    <legend>Контакты</legend>
+                                                    <input type="text" value="{{$application->phone}}">
+                                                </fieldset>
+                                                <fieldset class="commons-input">
+                                                    <legend>Электронная почта</legend>
+                                                    <input type="text" value="{{$application->email}}">
+                                                </fieldset>
+                                                <button class="content-bnt commons-btn">
+                                                    Выгрузить все документы
+                                                </button>
+                                            </form>
+                                            <div class="card-tooltip">
+                                                <button class="card-tooltip-btn">
+                                                    <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                        <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                        <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    </svg>
+                                                </button>
+                                                <div class="card-tooltip-content">
+                                                    <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Дублировать</button>
+                                                    <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
 
-                                            Удалить</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cabinitet-card">
-                                <img src="images/user-1.png" alt="">
-                                <form action="" class="cabinitet-form">
-                                    <fieldset class="commons-input">
-                                        <legend>И.Ф.О</legend>
-                                        <input type="text" placeholder="Петров И. С.">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Контакты</legend>
-                                        <input type="text" placeholder="+79914221142312">
-                                    </fieldset>
-                                    <fieldset class="commons-input">
-                                        <legend>Электронная почта</legend>
-                                        <input type="text" placeholder="p@gmail.com">
-                                    </fieldset>
-                                    <button class="content-bnt commons-btn">
-                                        Выгрузить все документы
-                                    </button>
-                                </form>
-                                <div class="card-tooltip">
-                                    <button class="card-tooltip-btn">
-                                        <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
-                                            <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
-                                        </svg>
-                                    </button>
-                                    <div class="card-tooltip-content">
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Дублировать</button>
-                                        <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-
-                                            Удалить</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                        Удалить</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <br>
+                            @endif
+                        @endforeach
                     </div>
+                    </div>
+                    <!--/2-->
+                    <!--3-->
                     <div class="etap-section">
                         <div class="etap-card">
                             <div class="title">
@@ -489,15 +255,171 @@
                                 Проведение
                                 процедуры
                             </div>
-
                         </div>
+
+                        @foreach($applications as $application)
+                            @if($application->stage == 3)
+                                <div class="etap-user-card">
+                                    <div class="cabinitet-card">
+                                        <img src="{{asset('images/user-1.png')}}" alt="">
+                                        <form action="" class="cabinitet-form">
+                                            <fieldset class="commons-input">
+                                                <legend>И.Ф.О</legend>
+                                                <input type="text" placeholder="Петров И. С.">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Контакты</legend>
+                                                <input type="text" placeholder="+79914221142312">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Электронная почта</legend>
+                                                <input type="text" placeholder="p@gmail.com">
+                                            </fieldset>
+                                            <button class="content-bnt commons-btn">
+                                                Выгрузить все документы
+                                            </button>
+                                        </form>
+                                        <div class="card-tooltip">
+                                            <button class="card-tooltip-btn">
+                                                <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                </svg>
+                                            </button>
+                                            <div class="card-tooltip-content">
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    Дублировать</button>
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+
+                                                    Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cabinitet-card">
+                                        <img src="{{asset('images/user-1.png')}}" alt="">
+                                        <form action="" class="cabinitet-form">
+                                            <fieldset class="commons-input">
+                                                <legend>И.Ф.О</legend>
+                                                <input type="text" placeholder="Петров И. С.">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Контакты</legend>
+                                                <input type="text" placeholder="+79914221142312">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Электронная почта</legend>
+                                                <input type="text" placeholder="p@gmail.com">
+                                            </fieldset>
+                                            <button class="content-bnt commons-btn">
+                                                Выгрузить все документы
+                                            </button>
+                                        </form>
+                                        <div class="card-tooltip">
+                                            <button class="card-tooltip-btn">
+                                                <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                </svg>
+                                            </button>
+                                            <div class="card-tooltip-content">
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    Дублировать</button>
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+
+                                                    Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cabinitet-card">
+                                        <img src="{{asset('images/user-1.png')}}" alt="">
+                                        <form action="" class="cabinitet-form">
+                                            <fieldset class="commons-input">
+                                                <legend>И.Ф.О</legend>
+                                                <input type="text" placeholder="Петров И. С.">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Контакты</legend>
+                                                <input type="text" placeholder="+79914221142312">
+                                            </fieldset>
+                                            <fieldset class="commons-input">
+                                                <legend>Электронная почта</legend>
+                                                <input type="text" placeholder="p@gmail.com">
+                                            </fieldset>
+                                            <button class="content-bnt commons-btn">
+                                                Выгрузить все документы
+                                            </button>
+                                        </form>
+                                        <div class="card-tooltip">
+                                            <button class="card-tooltip-btn">
+                                                <svg width="11" height="3" viewBox="0 0 11 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="9.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="1.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                    <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
+                                                </svg>
+                                            </button>
+                                            <div class="card-tooltip-content">
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    Дублировать</button>
+                                                <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.75 2.49154C7.3625 2.35404 5.96667 2.2832 4.575 2.2832C3.75 2.2832 2.925 2.32487 2.1 2.4082L1.25 2.49154" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.5415 2.071L3.63317 1.52516C3.69984 1.12933 3.74984 0.833496 4.454 0.833496H5.54567C6.24984 0.833496 6.304 1.146 6.3665 1.52933L6.45817 2.071" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M7.85433 3.80859L7.5835 8.00443C7.53766 8.65859 7.50016 9.16693 6.33766 9.16693H3.66266C2.50016 9.16693 2.46266 8.65859 2.41683 8.00443L2.146 3.80859" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M4.3042 6.875H5.6917" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M3.9585 5.2085H6.04183" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+
+                                                    Удалить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            @endif
+                        @endforeach
 
                     </div>
                 </div>
 
             </div>
+@endsection
 
+@section('right_sidebar')
 
+    <div class="right-sidebar">
+        <span class="cabinet-employee-title">Кабинет Сотрудника</span>
+        <div class="cabinet-sidebar-employee">
+            <div class="cabinet-employee-content">
+                <img class="cabinet-employee-img" src="{{asset('images/user-1.png')}}" alt="">
+                <div class="cabinet-employee-info">
+                    <span class="cabinet-employee-name">{{auth()->user()->name}}</span>
+                    <span class="cabinet-employee-email">{{auth()->user()->email}}</span>
+                </div>
+            </div>
+            <a href="{{route('logout')}}" class="commons-btn">Выход</a>
         </div>
+    </div>
 
 @endsection

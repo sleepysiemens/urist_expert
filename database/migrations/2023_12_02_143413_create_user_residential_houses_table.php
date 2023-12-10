@@ -17,12 +17,12 @@ return new class extends Migration
             $table->integer('number');
             $table->integer('application_id');
             $table->string('certificate')->nullable();
-            $table->string('subject')->nullable();
-            $table->string('region')->nullable();
-            $table->string('city')->nullable();
-            $table->string('locality')->nullable();
-            $table->string('house')->nullable();
-            $table->string('flat')->nullable();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('type')->nullable();
+            $table->string('square')->nullable();
+            $table->decimal('cost')->nullable();
+            $table->string('deposit')->nullable();
         });
     }
 

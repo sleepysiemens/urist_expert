@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 
@@ -74,7 +74,7 @@ class DocumentsController extends Controller
 
         $document=UserDoc::query()->where('application_id', '=',$application->id)->get();
 
-        return redirect()->route('admin.documents.edit', $document[0]->id);
+        return redirect()->route('employee.documents.edit', $document[0]->id);
     }
 
 
@@ -104,7 +104,7 @@ class DocumentsController extends Controller
         $air_transport=UserAirTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
         $other_transports=UserOtherTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
 
-        return view('admin.documents.index', compact(['document',
+        return view('employee.documents.index', compact(['document',
             'application',
             'bank_accounts',
             'users',
@@ -1075,7 +1075,7 @@ class DocumentsController extends Controller
 
         $document->update($data);
 
-        return redirect()->route('admin.documents.edit', request()->application_id);
+        return redirect()->route('employee.documents.edit', request()->application_id);
     }
     //================================/UPDATE DOCUMENT PAGE================================\\
 
@@ -1129,7 +1129,7 @@ class DocumentsController extends Controller
         }
         $document->update($sql_data);
 
-        return redirect()->route('admin.documents.edit', request()->application_id);
+        return redirect()->route('employee.documents.edit', request()->application_id);
     }
     //================================/UPLOAD DOCUMENTS================================\\
 
@@ -1139,7 +1139,7 @@ class DocumentsController extends Controller
     {
         $sql_data=['stage'=>2];
         $application->update($sql_data);
-        return redirect()->route('admin.documents.stage_2', $application->id);
+        return redirect()->route('employee.documents.stage_2', $application->id);
     }
     //================================/SECOND STAGE DOCUMENTS================================\\
 
@@ -1169,7 +1169,7 @@ class DocumentsController extends Controller
         $air_transports=UserAirTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
         $other_transports=UserOtherTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
 
-        return view('admin.documents.inventory', compact(['document',
+        return view('employee.documents.inventory', compact(['document',
             'application',
             'bank_accounts',
             'users',
@@ -1217,7 +1217,7 @@ class DocumentsController extends Controller
         $air_transports=UserAirTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
         $other_transports=UserOtherTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
 
-        return view('admin.documents.bfl', compact(['document',
+        return view('employee.documents.bfl', compact(['document',
             'application',
             'bank_accounts',
             'users',
@@ -1266,7 +1266,7 @@ class DocumentsController extends Controller
         $air_transports=UserAirTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
         $other_transports=UserOtherTransport::query()->where('application_id','=',$application->id)->where('id_number','!=','NULL')->orderBy('id')->get();
 
-        return view('admin.documents.creditors', compact(['document',
+        return view('employee.documents.creditors', compact(['document',
             'application',
             'bank_accounts',
             'users',
