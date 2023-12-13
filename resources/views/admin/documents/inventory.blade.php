@@ -132,11 +132,11 @@
                         имена, отчества</td>
                     <td class="two-cols">обязательно</td>
                     <td>
-                        @if(isset($old_passport[0]) and $old_passport[0]->surname!=NULL) {{$old_passport[0]->surname}}@else {{$current_passport->surname}} @endif
+                        @if(isset($old_passport[0]) and $old_passport[0]!=NULL) {{$old_passport[0]->surname}}@else {{$current_passport->surname}} @endif
                         <br>
-                        @if(isset($old_passport[0]) and $old_passport[0]->name!=NULL) {{$old_passport[0]->name}}@else {{$current_passport->name}} @endif
+                        @if(isset($old_passport[0]) and $old_passport[0]!=NULL) {{$old_passport[0]->name}}@else {{$current_passport->name}} @endif
                         <br>
-                        @if(isset($old_passport[0]) and $old_passport[0]->parent_name!=NULL) {{$old_passport[0]->parent_name}}@else {{$current_passport->parent_name}} @endif
+                        @if(isset($old_passport[0]) and $old_passport[0]!=NULL) {{$old_passport[0]->parent_name}}@else {{$current_passport->parent_name}} @endif
                     </td>
                 </tr>
                 <tr>
