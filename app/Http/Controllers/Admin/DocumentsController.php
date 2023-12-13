@@ -1139,7 +1139,7 @@ class DocumentsController extends Controller
     {
         $sql_data=['stage'=>2];
         $application->update($sql_data);
-        return redirect()->route('admin.documents.stage_2', $application->id);
+        return redirect()->route('admin.documents.inventory', $application->id);
     }
     //================================/SECOND STAGE DOCUMENTS================================\\
 
