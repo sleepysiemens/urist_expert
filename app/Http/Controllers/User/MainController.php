@@ -12,7 +12,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        $application=Application::query()->where('fio','=',auth()->user()->name)->get();
+        $application=Application::query()->where('user_id','=',auth()->user()->id)->get();
         $employee=User::query()->where('id','=',$application[0]->employee_id)->get();
 
         return view('user.index', compact(['employee', 'application']));

@@ -1,5 +1,5 @@
 <div class="left-sidebar">
-    <a href="index.html">
+    <a href="{{asset(route('admin.main.index'))}}">
         <div class="left-item sidebar-item active">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -10,7 +10,7 @@
         </div>
     </a>
     <div class="left-item left-item-stroke sidebar-item left-item-klent">
-        <a href="klient.html">
+        <a >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M13.5001 5.37C13.4551 5.3625 13.4026 5.3625 13.3576 5.37C12.3226 5.3325 11.4976 4.485 11.4976 3.435C11.4976 2.3625 12.3601 1.5 13.4326 1.5C14.5051 1.5 15.3676 2.37 15.3676 3.435C15.3601 4.485 14.5351 5.3325 13.5001 5.37Z"
@@ -41,13 +41,13 @@
         </label>
     </div>
     @foreach($users as $user)
-        <a href="date.html">
+        <a href="{{asset(route('admin.user.index',$user->id))}}">
             <p class="left-item-p">{{$user->phone}}</p>
         </a>
     @endforeach
 
     <div class="left-item left-item-stroke sidebar-item left-item-klent">
-        <a href="klient.html">
+        <a>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M13.5001 5.37C13.4551 5.3625 13.4026 5.3625 13.3576 5.37C12.3226 5.3325 11.4976 4.485 11.4976 3.435C11.4976 2.3625 12.3601 1.5 13.4326 1.5C14.5051 1.5 15.3676 2.37 15.3676 3.435C15.3601 4.485 14.5351 5.3325 13.5001 5.37Z"
@@ -79,7 +79,7 @@
     </div>
 
     @foreach($users as $user)
-        <a href="date.html">
+        <a href="{{asset(route('admin.user.index',$user->id))}}">
             <p class="left-item-p">{{$user->fio}}</p>
         </a>
     @endforeach

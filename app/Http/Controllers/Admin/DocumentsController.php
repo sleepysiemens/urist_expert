@@ -74,7 +74,7 @@ class DocumentsController extends Controller
 
         $document=UserDoc::query()->where('application_id', '=',$application->id)->get();
 
-        return redirect()->route('admin.documents.edit', $document[0]->id);
+        return redirect()->route('admin.documents.edit', $application->id);
     }
 
 

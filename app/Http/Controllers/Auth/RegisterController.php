@@ -66,17 +66,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $application = Application::create([
-            'fio' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-        ]);
-
-        return User::create([
+        $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $application = Application::create([
+            'fio' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'user_id' => $user->id,
+        ]);
+
+        return $user;
     }
 }
