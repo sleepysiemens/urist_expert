@@ -1432,15 +1432,15 @@
                     <div class="confirm-date">
                         <div>
                             <span>"</span>
-                            <input type="text">
+                            <input type="text" value="{{date("d")}}">
                             <span>"</span>
                         </div>
                         <div>
-                            <input type="text">
+                            <input type="text" value="{{date("m")}}">
                         </div>
                         <div>
                             <span>20</span>
-                            <input id="20" type="number" min="2" max="2">
+                            <input id="20" type="number" min="23" max="99" value="{{date("y")}}">
                             <span>г.</span>
                         </div>
                     </div>
@@ -1601,7 +1601,8 @@
 @endsection
 
 @section('left-sidebar')
-    <a href="document.html">
+    @if($application->stage>1)
+        <a href="document.html">
         <div class="left-item sidebar-item left-item-document">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -1671,4 +1672,5 @@
             <span>Кредиторы</span>
         </div>
     </a>
+    @endif
 @endsection

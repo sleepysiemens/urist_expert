@@ -1,5 +1,5 @@
 <div class="left-sidebar">
-    <a href="{{asset(route('employee.main.index'))}}">
+    <a href="{{asset(route('admin.main.index'))}}">
         <div class="left-item sidebar-item active">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -41,7 +41,7 @@
         </label>
     </div>
     @foreach($users as $user)
-        <a href="{{asset(route('employee.user.index',$user->id))}}">
+        <a href="{{asset(route('admin.user.index',$user->id))}}">
             <p class="left-item-p">{{$user->phone}}</p>
         </a>
     @endforeach
@@ -79,7 +79,7 @@
     </div>
 
     @foreach($users as $user)
-        <a href="{{asset(route('employee.user.index',$user->id))}}">
+        <a href="{{asset(route('admin.user.index',$user->id))}}">
             <p class="left-item-p">{{$user->fio}}</p>
         </a>
     @endforeach

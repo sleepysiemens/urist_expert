@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('region')->nullable();
             $table->integer('kind_of_credit')->nullable();
-            $table->integer('statement')->nullable();
-
+            $table->string('statement')->nullable();
+            $table->string('file')->nullable();
         });
     }
 

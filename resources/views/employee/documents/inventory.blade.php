@@ -4,7 +4,7 @@
 
     <div class="content-wrap">
         <div class="content-top">
-            <a href="{{route('employee.main.index')}}" class="content-top-left">
+            <a href="{{route('admin.main.index')}}" class="content-top-left">
                 <div class="back-btn">
                     <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1L1 10.5L10 20" stroke="#51526C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="content-head">
-            <a href="{{route('employee.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
+            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -55,7 +55,7 @@
                 </p>
                 <b>Сбор документов</b>
             </a>
-            <a href="{{route('employee.documents.inventory', $application->id)}}" class="content-head-item @if($stage==2) content-head-item-active @endif">
+            <a href="{{route('admin.documents.inventory', $application->id)}}" class="content-head-item @if($stage==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="content">
-            <form class="input-wrap" method="post" action="{{ route('employee.application.update', $application->id) }}">
+            <form class="input-wrap" method="post" action="{{ route('admin.application.update', $application->id) }}">
                 @csrf
                 @method('PATCH')
                 <fieldset class="commons-input">
@@ -1432,15 +1432,15 @@
                     <div class="confirm-date">
                         <div>
                             <span>"</span>
-                            <input type="text">
+                            <input type="text" value="{{date("d")}}">
                             <span>"</span>
                         </div>
                         <div>
-                            <input type="text">
+                            <input type="text" value="{{date("m")}}">
                         </div>
                         <div>
                             <span>20</span>
-                            <input id="20" type="number" min="2" max="2">
+                            <input id="20" type="number" min="23" max="99" value="{{date("y")}}">
                             <span>г.</span>
                         </div>
                     </div>
@@ -1601,7 +1601,8 @@
 @endsection
 
 @section('left-sidebar')
-    <a href="document.html">
+    @if($application->stage>1)
+        <a href="document.html">
         <div class="left-item sidebar-item left-item-document">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -1620,7 +1621,7 @@
         </div>
     </a>
 
-    <a href="{{asset(route('employee.documents.inventory', $application->id))}}">
+    <a href="{{asset(route('admin.documents.inventory', $application->id))}}">
         <p class="left-item-span active"><span>Опись имушества</span> <b>
                 {{
                     $document[0]->other_transport_amount+
@@ -1638,10 +1639,10 @@
                 }}
             </b></p>
     </a>
-    <a href="{{asset(route('employee.documents.creditors', $application->id))}}">
+    <a href="{{asset(route('admin.documents.creditors', $application->id))}}">
         <p class="left-item-span "><span>Список кредиторов</span> <b>{{$document[0]->creditors_amount}}</b></p>
     </a>
-    <a href="{{asset(route('employee.documents.bfl', $application->id))}}">
+    <a href="{{asset(route('admin.documents.bfl', $application->id))}}">
         <p class="left-item-span "><span>Заявление БФЛ</span> <b>1</b></p>
     </a>
 
@@ -1671,4 +1672,5 @@
             <span>Кредиторы</span>
         </div>
     </a>
+    @endif
 @endsection

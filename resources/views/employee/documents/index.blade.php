@@ -3,12 +3,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/show_hide.js')}}"></script>
 
-    <form class="content-wrap" action="{{route('employee.documents.update', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
+    <form class="content-wrap" action="{{route('admin.documents.update', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <input type="hidden" name="application_id" value="{{$application->id}}">
         <div class="content-top">
-            <a href="{{route('employee.main.index')}}" class="content-top-left">
+            <a href="{{route('admin.main.index')}}" class="content-top-left">
                 <div class="back-btn">
                     <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1L1 10.5L10 20" stroke="#51526C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="content-head">
-            <a href="{{route('employee.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
+            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -58,7 +58,7 @@
                 </p>
                 <b>Сбор документов</b>
             </a>
-            <a href="@if($application->stage>1) {{route('employee.documents.inventory', $application->id)}} @endif" class="content-head-item @if($stage==2) content-head-item-active @endif">
+            <a href="@if($application->stage>1) {{route('admin.documents.inventory', $application->id)}} @endif" class="content-head-item @if($stage==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -528,6 +528,14 @@
             <fieldset class="commons-input mb-20 w-100">
                 <legend>Место работы</legend>
                 <input type="text" placeholder="dkj_media.mail.ru" name="work_place" value="{{$document[0]->work_place}}">
+            </fieldset>
+            <fieldset class="commons-input mb-20 w-100">
+                <legend>Адрес</legend>
+                <input type="text" placeholder="dkj_media.mail.ru" name="work_address" value="{{$document[0]->work_address}}">
+            </fieldset>
+            <fieldset class="commons-input">
+                <legend>Телефон</legend>
+                <input type="text" name="work_phone" placeholder="***" value="{{$document[0]->work_phone}}">
             </fieldset>
 
             <div class="document-btn-wrap">
@@ -1728,9 +1736,14 @@
                             <input type="text" placeholder="Иванов М.С" name="creditors_statement_{{$i}}" @if(isset($creditors[$i-1])) value="{{$creditors[$i-1]->statement}}" @endif>
                         </fieldset>
 
+                        <fieldset class="commons-input ">
+                            <legend>Задолженность</legend>
+                            <input type="number" placeholder="Иванов М.С" name="creditors_duty_{{$i}}" @if(isset($creditors[$i-1])) value="{{$creditors[$i-1]->duty}}" @endif>
+                        </fieldset>
 
-                        <label class="commons-btn-blue big mw-209 upload actives" for="input-file-40">
-                            <input class="input-file" id="input-file-40" type="file" hidden="">
+
+                        <label class="commons-btn-blue big mw-209 upload actives" for="creditors_file_{{$i}}">
+                            <input class="input-file" id="creditors_file_{{$i}}" name="creditors_file_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.7966C10.5034 14.7966 10.0926 14.3858 10.0926 13.879V7.3118L7.11751 10.2869L5.81992 8.98932L11.0102 3.79901L16.2006 8.98932L14.903 10.2869L11.9277 7.31158V13.879C11.9277 14.3858 11.5169 14.7966 11.0101 14.7966ZM5.50497 12.9743H3.66992V16.6444C3.66992 17.6579 4.4915 18.4794 5.50497 18.4794H16.5153C17.5288 18.4794 18.3503 17.6579 18.3503 16.6444V12.9743H16.5153V16.6444H5.50497V12.9743Z" fill="white"></path>
                             </svg>
@@ -1741,6 +1754,57 @@
                         </label>
                     </div>
 
+                </div>
+            @endfor
+
+            <h4 class="title">Денежные обязательства</h4>
+            <div class="document-btn-wrap">
+                <fieldset class="commons-input number-input">
+                    <legend>Количество</legend>
+                    <input type="number" id="monetary_obligations_amount" name="monetary_obligations_amount" placeholder="1" value="{{$document[0]->monetary_obligations_amount}}" onkeyup="monetary_obligations_amount_func()">
+                    <div class="arrow">
+                    <span class="arrow-up">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.75 7.5L6 3.75L2.25 7.5" stroke="#51526C" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                        <span class="arrow-down">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.25 4.5L6 8.25L9.75 4.5" stroke="#51526C" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </span>
+                    </div>
+                </fieldset>
+            </div>
+            @for($i=1; $i<=1; $i++)
+                <div class="monetary_obligations_div_{{$i}} hide">
+                    <div class="input-wrap pt-0">
+
+                        <fieldset class="commons-input">
+                            <legend>Содержание обязательства</legend>
+                            <input type="text" placeholder="Иванов М.С " name="monetary_obligations_content_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->content}}" @endif>
+                        </fieldset>
+                        <fieldset class="commons-input">
+                            <legend>Кредитор</legend>
+                            <input type="text" placeholder="Иванов М.С " name="monetary_obligations_creditor_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->creditor}}" @endif>
+                        </fieldset>
+                        <fieldset class="commons-input">
+                            <legend>Основание возникновения</legend>
+                            <input type="text" placeholder="Иванов М.С " name="monetary_obligations_basis_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->basis}}" @endif>
+                        </fieldset>
+                        <fieldset class="commons-input">
+                            <legend>всего</legend>
+                            <input type="number" placeholder="Иванов М.С " name="monetary_obligations_total_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->total}}" @endif>
+                        </fieldset>
+                        <fieldset class="commons-input">
+                            <legend>задолженность</legend>
+                            <input type="number" placeholder="Иванов М.С " name="monetary_obligations_debt_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->debt}}" @endif>
+                        </fieldset>
+                        <fieldset class="commons-input">
+                            <legend>Штрафы</legend>
+                            <input type="number" placeholder="Иванов М.С " name="monetary_obligations_fine_{{$i}}" @if(isset($monetary_obligations[$i-1])) value="{{$monetary_obligations[$i-1]->fine}}" @endif>
+                        </fieldset>
+                    </div>
                 </div>
             @endfor
 
@@ -1777,41 +1841,14 @@
                             <input type="text" placeholder="Москва" name="obligatory_arrears_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->arrears}}" @endif>
                         </fieldset>
 
-                        <fieldset class="commons-input">
-                            <legend>Вид кредита</legend>
-                            <select name="obligatory_kind_of_credit_{{$i}}" id="">
-                                <option @if(isset($obligatory_payments[$i-1]) and $obligatory_payments[$i-1]->kind_of_credit==1) selected @endif value="1">Залоговый кредит</option>
-                                <option @if(isset($obligatory_payments[$i-1]) and $obligatory_payments[$i-1]->kind_of_credit==2) selected @endif value="2">Кредит</option>
-                                <option @if(isset($obligatory_payments[$i-1]) and $obligatory_payments[$i-1]->kind_of_credit==3) selected @endif value="3">Ипотека</option>
-                                <option @if(isset($obligatory_payments[$i-1]) and $obligatory_payments[$i-1]->kind_of_credit==4) selected @endif value="4">Займа</option>
-                                <option @if(isset($obligatory_payments[$i-1]) and $obligatory_payments[$i-1]->kind_of_credit==5) selected @endif value="5">Залоговый кредит</option>
-                            </select>
-                        </fieldset>
-
-                        <label class="commons-btn-blue big upload actives mw-209" for="obligatory_tax_requirements_{{$i}}">
-                            <input class="input-file" id="obligatory_tax_requirements_{{$i}}" name="obligatory_tax_requirements_{{$i}}" type="file" hidden="">
-                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0101 14.6676C10.5034 14.6676 10.0926 14.2568 10.0926 13.7501V7.18283L7.11751 10.158L5.81992 8.86035L11.0102 3.67004L16.2006 8.86035L14.903 10.158L11.9277 7.18262V13.7501C11.9277 14.2568 11.5169 14.6676 11.0101 14.6676ZM5.50497 12.8453H3.66992V16.5154C3.66992 17.5289 4.4915 18.3505 5.50497 18.3505H16.5153C17.5288 18.3505 18.3503 17.5289 18.3503 16.5154V12.8453H16.5153V16.5154H5.50497V12.8453Z" fill="white"></path>
-                            </svg>
-                            <span>Требования налоговой</span>
-                        </label>
-                    </div>
-                    <div action="" class="document-input-wrap wrap">
-                        <fieldset class="commons-input">
-                            <legend>Сумма основной задолженности</legend>
-                            <input type="number" placeholder="100000" name="obligatory_main_duty_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->main_duty}}" @endif>
-                        </fieldset>
-
-                        <fieldset class="commons-input">
-                            <legend>Сумма просроченной</legend>
-                            <input type="text" placeholder="1500000" name="obligatory_expired_duty_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->main_duty}}" @endif>
-                        </fieldset>
 
                         <fieldset class="commons-input">
                             <legend>Штрафы, пени</legend>
                             <input type="number" placeholder="150000" name="obligatory_fines_{{$i}}" @if(isset($obligatory_payments[$i-1])) value="{{$obligatory_payments[$i-1]->fines}}" @endif>
                         </fieldset>
 
+                    </div>
+                    <div action="" class="document-input-wrap wrap">
                         <label class="commons-btn-blue upload actives big mw-209" for="obligatory_certificate_of_absence_{{$i}}">
                             <input class="input-file" id="obligatory_certificate_of_absence_{{$i}}" name="obligatory_certificate_of_absence_{{$i}}" type="file" hidden="">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1885,12 +1922,17 @@
 
                 <fieldset class="commons-input">
                     <legend>Арбитражный управляющий</legend>
-                    <input type="text" placeholder="Text">
+                    <input type="text" placeholder="Text" name="arbitration_manager" value="{{$document[0]->arbitration_manager}}">
                 </fieldset>
 
                 <fieldset class="commons-input">
                     <legend>Арбитражный суд</legend>
-                    <input type="text" placeholder="Text">
+                    <input type="text" placeholder="Text" name="arbitration_court" value="{{$document[0]->arbitration_court}}">
+                </fieldset>
+
+                <fieldset class="commons-input">
+                    <legend>Адрес арбитражного суда</legend>
+                    <input type="text" placeholder="Text" name="court_address" value="{{$document[0]->court_address}}">
                 </fieldset>
 
                 <div class="document-btn-wrap">
@@ -1911,7 +1953,7 @@
                       Выгрузить все документы
                     </span>
                     </label>
-                    <form action="{{route('employee.documents.second_stage', $application->id)}}" method="post">
+                    <form action="{{route('admin.documents.second_stage', $application->id)}}" method="post">
                         @csrf
                         @method('PATCH')
                         <button class="commons-btn big mw-209">
@@ -1926,7 +1968,7 @@
 @endsection
 
 @section('right_sidebar')
-    <form action="{{route('employee.documents.add_file', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.documents.add_file', $document[0]->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <input type="hidden" name="application_id" value="{{$application->id}}">
@@ -2042,7 +2084,8 @@
 
 
     @section('left-sidebar')
-        <a href="document.html">
+        @if($application->stage>1)
+            <a href="document.html">
             <div class="left-item sidebar-item left-item-document">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -2061,7 +2104,7 @@
             </div>
         </a>
 
-        <a href="{{asset(route('employee.documents.inventory', $application->id))}}">
+        <a href="{{asset(route('admin.documents.inventory', $application->id))}}">
             <p class="left-item-span "><span>Опись имушества</span> <b>
                     {{
                         $document[0]->other_transport_amount+
@@ -2079,10 +2122,10 @@
                     }}
                 </b></p>
         </a>
-        <a href="{{asset(route('employee.documents.creditors', $application->id))}}">
+        <a href="{{asset(route('admin.documents.creditors', $application->id))}}">
             <p class="left-item-span "><span>Список кредиторов</span> <b>{{$document[0]->creditors_amount}}</b></p>
         </a>
-        <a href="{{asset(route('employee.documents.bfl', $application->id))}}">
+        <a href="{{asset(route('admin.documents.bfl', $application->id))}}">
             <p class="left-item-span "><span>Заявление БФЛ</span> <b>1</b></p>
         </a>
 
@@ -2112,4 +2155,5 @@
                 <span>Кредиторы</span>
             </div>
         </a>
+        @endif
     @endsection

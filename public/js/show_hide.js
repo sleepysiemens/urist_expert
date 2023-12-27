@@ -80,6 +80,19 @@ function obligatory_payments_amount_func()
     }
 };
 
+function monetary_obligations_amount_func()
+{
+    let monetary_obligations_amount=$( "#monetary_obligations_amount" ).val();
+    for(let i=1;i<=monetary_obligations_amount;i++)
+    {
+        $('.monetary_obligations_div_'+i).removeClass('hide');
+    }
+    for(let i=10;i>monetary_obligations_amount;i--)
+    {
+        $('.monetary_obligations_div_'+i).addClass('hide');
+    }
+};
+
 $('#show-password').click(function()
 {
         $('#gos_uslugi_password').attr('type','text');

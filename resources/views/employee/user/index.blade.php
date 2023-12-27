@@ -29,7 +29,7 @@
         </div>
 
         <h4 class="title">Этапы договора</h4>
-        <a href="{{asset(route('employee.user.add_app',$user->id))}}" class="content-bnt commons-btn">
+        <a href="{{asset(route('admin.user.add_app',$user->id))}}" class="content-bnt commons-btn">
             Добавить заявку
         </a>
         <br>

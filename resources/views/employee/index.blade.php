@@ -27,7 +27,7 @@
                                     <div class="register-card">
                                         <div class="register-card-user">
                                             <img src="{{asset('images/reg-img.png')}}" alt="">
-                                            <a href="{{ route('employee.documents.create', $application->id) }}" class="commons-btn">Добавить клиента</a>
+                                            <a href="{{ route('admin.documents.create', $application->id) }}" class="commons-btn">Добавить клиента</a>
                                         </div>
                                         <div class="register-card-content">
                                             <div class="register-card-info">
@@ -60,13 +60,14 @@
                                                     <circle cx="5.5" cy="1.5" r="1.5" fill="#064570"/>
                                                 </svg>
                                             </button>
+                                            @if(auth()->user()->role=='admin')
                                                 <div class="card-tooltip-content">
-                                                    <a href="{{asset(route('employee.user.add_app', $application->user_id))}}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <a href="{{asset(route('admin.user.add_app', $application->user_id))}}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </svg>
                                                         Дублировать</a>
-                                                    <form method="post" action="{{route('employee.application.destroy',$application->id)}}">
+                                                    <form method="post" action="{{route('admin.application.destroy',$application->id)}}">
                                                         @csrf
                                                         @method('delete')
                                                     <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,9 +80,16 @@
                                                         Удалить</button>
                                                     </form>
 
+                                                    <a href="{{route('admin.application.add_employee', $application->id)}}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M6.66683 5.37516V7.12516C6.66683 8.5835 6.0835 9.16683 4.62516 9.16683H2.87516C1.41683 9.16683 0.833496 8.5835 0.833496 7.12516V5.37516C0.833496 3.91683 1.41683 3.3335 2.87516 3.3335H4.62516C6.0835 3.3335 6.66683 3.91683 6.66683 5.37516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M9.16683 2.87516V4.62516C9.16683 6.0835 8.5835 6.66683 7.12516 6.66683H6.66683V5.37516C6.66683 3.91683 6.0835 3.3335 4.62516 3.3335H3.3335V2.87516C3.3335 1.41683 3.91683 0.833496 5.37516 0.833496H7.12516C8.5835 0.833496 9.16683 1.41683 9.16683 2.87516Z" stroke="#626262" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Назначить сотрудника
+                                                    </a>
 
                                                 </div>
 
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +117,7 @@
                         </div>
                         @foreach($applications as $application)
                             @if($application->stage == 1)
-                                <a href="{{route('employee.documents.edit', $application->id)}}" class="etap-user-card">
+                                <a href="{{route('admin.documents.edit', $application->id)}}" class="etap-user-card">
                                     <div class="cabinitet-card">
                                         <img src="{{asset('images/user-1.png')}}" alt="">
                                         <form action="" class="cabinitet-form">
@@ -138,7 +146,7 @@
                                                 </svg>
                                             </button>
                                             <div class="card-tooltip-content">
-                                                <form method="post" action="{{route('employee.application.destroy',$application->id)}}">
+                                                <form method="post" action="{{route('admin.application.destroy',$application->id)}}">
                                                     @csrf
                                                     @method('delete')
                                                     <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +188,7 @@
 
                         @foreach($applications as $application)
                             @if($application->stage == 2)
-                                    <a href="{{route('employee.documents.inventory', $application->id)}}" class="etap-user-card">
+                                    <a href="{{route('admin.documents.inventory', $application->id)}}" class="etap-user-card">
                                         <div class="cabinitet-card">
                                             <img src="{{asset('images/user-1.png')}}" alt="">
                                             <form action="" class="cabinitet-form">
@@ -209,7 +217,7 @@
                                                     </svg>
                                                 </button>
                                                 <div class="card-tooltip-content">
-                                                    <form method="post" action="{{route('employee.application.destroy',$application->id)}}">
+                                                    <form method="post" action="{{route('admin.application.destroy',$application->id)}}">
                                                         @csrf
                                                         @method('delete')
                                                         <button><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">

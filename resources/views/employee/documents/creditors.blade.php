@@ -4,7 +4,7 @@
 
     <div class="content-wrap">
         <div class="content-top">
-            <a href="{{route('employee.main.index')}}" class="content-top-left">
+            <a href="{{route('admin.main.index')}}" class="content-top-left">
                 <div class="back-btn">
                     <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10 1L1 10.5L10 20" stroke="#51526C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="content-head">
-            <a href="{{route('employee.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
+            <a href="{{route('admin.documents.edit', $application->id)}}" class="content-head-item @if($stage==1) content-head-item-active @endif ">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -55,7 +55,7 @@
                 </p>
                 <b>Сбор документов</b>
             </a>
-            <a href="{{route('employee.documents.inventory', $application->id)}}" class="content-head-item @if($stage==2) content-head-item-active @endif">
+            <a href="{{route('admin.documents.inventory', $application->id)}}" class="content-head-item @if($stage==2) content-head-item-active @endif">
                 <p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <ellipse opacity="0.4" cx="10.9921" cy="11.2321" rx="8.6515" ry="8.6515" fill="#C2C2C2"></ellipse>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="content">
-            <form class="input-wrap" method="post" action="{{ route('employee.application.update', $application->id) }}">
+            <form class="input-wrap" method="post" action="{{ route('admin.application.update', $application->id) }}">
                 @csrf
                 @method('PATCH')
                 <fieldset class="commons-input">
@@ -343,52 +343,45 @@
                         задолжен­ность 5
                     </th>
                 </tr>
-                @foreach($creditors as $creditor)
+                @php $cnt=0; @endphp
+                @foreach($monetary_obligations as $monetary_obligation)
+                    @php $cnt++; @endphp
                     <tr>
-                        <td class="number">1.@if(isset($creditor->number)){{$creditor->number}}@endif</td>
-                        @if(isset($creditor->kind_of_credit))
-                        @switch($creditor->kind_of_credit)
-                                @case(1)
-                                    @php $kind_of_credit='Залоговый кредит'@endphp
-                                    @break
-                                @case(2)
-                                    @php $kind_of_credit='Кредит'@endphp
-                                    @break
-                                @case(3)
-                                    @php $kind_of_credit='Ипотека'@endphp
-                                    @break
-                                @case(4)
-                                    @php $kind_of_credit='Займа'@endphp
-                                    @break
-                                @case(5)
-                                    @php $kind_of_credit='Залоговый кредит'@endphp
-                                    @break
-                        @endswitch
-                        @endif
-                        <td class="normal start">{{$kind_of_credit}}</td>
+                        <td class="number">1.{{$cnt}}</td>
+
+                        <td class="normal start">@if(isset($monetary_obligation->content)){{$monetary_obligation->content}}@endif</td>
+                        <td class="normal">@if(isset($monetary_obligation->creditor)){{$monetary_obligation->creditor}}@endif</td>
+                        <td class="normal start"></td>
+                        <td class="normal start">@if(isset($monetary_obligation->basis)){{$monetary_obligation->basis}}@endif</td>
                         <td class="normal">
-                            @if(isset($creditor->name)){{$creditor->name}}@endif
-                        </td>
-                        <td class="normal start">
-                            @if(isset($creditor->region)){{$creditor->region}}@endif
-                        </td>
-                        <td class="normal start">
-                            @if(isset($creditor->statement)){{$creditor->statement}}@endif
-                        </td>
-                        <td class="normal">
-                            45 016, 35 <br>
+                            @if(isset($monetary_obligation->total)){{$monetary_obligation->total}}@else 0 @endif<br>
                             рублей
                         </td>
                         <td class="normal">
-                            45 016, 3 <br>
+                            @if(isset($monetary_obligation->debt)){{$monetary_obligation->debt}}@else 0 @endif<br>
                             рублей
                         </td>
                         <td class="normal">
-                            8 272, 4 <br>
+                            @if(isset($monetary_obligation->fine)){{$monetary_obligation->fine}}@else 0 @endif<br>
                             рублей
                         </td>
                     </tr>
                 @endforeach
+
+                @if($cnt==0)
+                    <tr>
+                        <td class="number">
+                            1.1
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endif
 
                 <tr>
                     <td class="number">2</td>
@@ -413,7 +406,19 @@
                         иные санкции
                     </th>
                 </tr>
+                @php $cnt=0; @endphp
                 @foreach($obligatory_payments as $obligatory_payment)
+                    @php $cnt++; @endphp
+                    <tr>
+                        <td class="number">
+                            2.{{$cnt}}
+                        </td>
+                        <td colspan="3">@if(isset($obligatory_payment->tax_name)){{$obligatory_payment->tax_name}}@endif</td>
+                        <td colspan="2">@if(isset($obligatory_payment->arrears)){{$obligatory_payment->arrears}}@endif</td>
+                        <td colspan="2">@if(isset($obligatory_payment->fines)){{$obligatory_payment->fines}}@endif</td>
+                    </tr>
+                @endforeach
+                @if($cnt==0)
                     <tr>
                         <td class="number">
                             2.1
@@ -422,7 +427,7 @@
                         <td colspan="2"></td>
                         <td colspan="2"></td>
                     </tr>
-                @endforeach
+                @endif
 
                 </tbody></table>
 
@@ -462,15 +467,15 @@
                     <div class="confirm-date">
                         <div>
                             <span>"</span>
-                            <input type="text">
+                            <input type="text" value="{{date("d")}}">
                             <span>"</span>
                         </div>
                         <div>
-                            <input type="text">
+                            <input type="text" value="{{date("m")}}">
                         </div>
                         <div>
                             <span>20</span>
-                            <input id="20" type="number" min="2" max="2">
+                            <input id="20" type="number" min="23" max="99" value="{{date("y")}}">
                             <span>г.</span>
                         </div>
                     </div>
@@ -609,7 +614,8 @@
 @endsection
 
 @section('left-sidebar')
-    <a href="document.html">
+    @if($application->stage>1)
+        <a href="document.html">
         <div class="left-item sidebar-item left-item-document">
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -628,7 +634,7 @@
         </div>
     </a>
 
-    <a href="{{asset(route('employee.documents.inventory', $application->id))}}">
+    <a href="{{asset(route('admin.documents.inventory', $application->id))}}">
         <p class="left-item-span"><span>Опись имушества</span> <b>
                 {{
                     $document[0]->other_transport_amount+
@@ -646,10 +652,10 @@
                 }}
             </b></p>
     </a>
-    <a href="{{asset(route('employee.documents.creditors', $application->id))}}">
+    <a href="{{asset(route('admin.documents.creditors', $application->id))}}">
         <p class="left-item-span active"><span>Список кредиторов</span> <b>{{$document[0]->creditors_amount}}</b></p>
     </a>
-    <a href="{{asset(route('employee.documents.bfl', $application->id))}}">
+    <a href="{{asset(route('admin.documents.bfl', $application->id))}}">
         <p class="left-item-span "><span>Заявление БФЛ</span> <b>1</b></p>
     </a>
 
@@ -679,4 +685,5 @@
             <span>Кредиторы</span>
         </div>
     </a>
+    @endif
 @endsection
