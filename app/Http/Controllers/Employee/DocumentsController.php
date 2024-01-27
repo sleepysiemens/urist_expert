@@ -27,6 +27,7 @@ use App\Models\UserAgriculturalTechnique;
 use App\Models\UserWaterTransport;
 use App\Models\UserAirTransport;
 use App\Models\UserOtherTransport;
+use App\Models\MonetaryObligations;
 
 use App\Models\UserCurrentPassport;
 use App\Models\OldPassport;
@@ -67,6 +68,7 @@ class DocumentsController extends Controller
             ObligatoryPayment::create($application_id);
             Credotor::create($application_id);
             CreditorNotification::create($application_id);
+            MonetaryObligations::create($application_id);
         }
 
         $data=['stage'=>1];
@@ -768,9 +770,9 @@ class DocumentsController extends Controller
             for($i=1;$i<=$data['creditors_amount'];$i++)
             {
                 $creditor=Credotor::query()->where('application_id','=',$data['application_id'])->where('number','=',$i)->get();
-                if(isset($data['creditors_statement_'.$i]))
+                if(isset($data['creditors_file_'.$i]))
                 {
-                    foreach ($data['creditors_statement_'.$i] as $children)
+                    foreach ($data['creditors_file_'.$i] as $children)
                     {
                         $name=$children->getClientOriginalName();
                         $file = $children;
@@ -780,7 +782,9 @@ class DocumentsController extends Controller
                             'name'=>$data['creditors_name_'.$i],
                             'kind_of_credit'=>$data['creditors_kind_of_credit_'.$i],
                             'region'=>$data['creditors_region_'.$i],
-                            'statement'=>$name,
+                            'statement'=>$data['creditors_statement_'.$i],
+                            'duty'=>$data['creditors_duty_'.$i],
+                            'file'=>$name,
                         ];
                     }
                 }
@@ -790,6 +794,8 @@ class DocumentsController extends Controller
                         'name'=>$data['creditors_name_'.$i],
                         'kind_of_credit'=>$data['creditors_kind_of_credit_'.$i],
                         'region'=>$data['creditors_region_'.$i],
+                        'statement'=>$data['creditors_statement_'.$i],
+                        'duty'=>$data['creditors_duty_'.$i],
                     ];
                 }
                 //BankAccount::create($sql_data);
@@ -806,9 +812,6 @@ class DocumentsController extends Controller
                 $sql_data=[
                     'tax_name'=>$data['obligatory_payments_tax_name_'.$i],
                     'arrears'=>$data['obligatory_arrears_'.$i],
-                    'kind_of_credit'=>$data['obligatory_kind_of_credit_'.$i],
-                    'main_duty'=>$data['obligatory_main_duty_'.$i],
-                    'expired_duty'=>$data['obligatory_expired_duty_'.$i],
                     'fines'=>$data['obligatory_fines_'.$i],
                 ];
 
@@ -860,6 +863,25 @@ class DocumentsController extends Controller
                         $sql_data['court_deposit']=$name;
                     }
                 }
+                $obligatory_payment[0]->update($sql_data);
+            }
+        }
+
+        //monetary_obligations
+        if(isset($data['monetary_obligations_amount']) and $data['monetary_obligations_amount']>0)
+        {
+            for($i=1;$i<=$data['monetary_obligations_amount'];$i++)
+            {
+                $monetary_obligations=MonetaryObligations::query()->where('application_id','=',$data['application_id'])->where('number','=',$i)->get();
+                $sql_data=[
+                    'content'=>$data['monetary_obligations_content_'.$i],
+                    'creditor'=>$data['monetary_obligations_creditor_'.$i],
+                    'basis'=>$data['monetary_obligations_basis_'.$i],
+                    'total'=>$data['monetary_obligations_total_'.$i],
+                    'debt'=>$data['monetary_obligations_debt_'.$i],
+                    'fine'=>$data['monetary_obligations_fine_'.$i]
+                ];
+
                 $obligatory_payment[0]->update($sql_data);
             }
         }
@@ -1055,13 +1077,19 @@ class DocumentsController extends Controller
             unset($data['creditors_region_'.$i]);
             unset($data['creditors_kind_of_credit_'.$i]);
             unset($data['creditors_statement_'.$i]);
+            unset($data['creditors_file_'.$i]);
+            unset($data['creditors_duty_'.$i]);
 
             unset($data['obligatory_payments_tax_name_'.$i]);
             unset($data['obligatory_arrears_'.$i]);
-            unset($data['obligatory_kind_of_credit_'.$i]);
-            unset($data['obligatory_main_duty_'.$i]);
-            unset($data['obligatory_expired_duty_'.$i]);
             unset($data['obligatory_fines_'.$i]);
+
+            unset($data['monetary_obligations_content_'.$i]);
+            unset($data['monetary_obligations_creditor_'.$i]);
+            unset($data['monetary_obligations_basis_'.$i]);
+            unset($data['monetary_obligations_total_'.$i]);
+            unset($data['monetary_obligations_debt_'.$i]);
+            unset($data['monetary_obligations_fine_'.$i]);
         }
 
         if(!isset($data['address_matches'])) $data['address_matches']=0;
@@ -1197,7 +1225,7 @@ class DocumentsController extends Controller
         $stage=2;
         $document=UserDoc::query()->where('application_id','=',$application->id)->orderBy('id')->get();
         $bank_accounts=BankAccount::query()->where('application_id','=',$application->id)->where('bank_name','!=','NULL')->orderBy('id')->get();
-        $creditors=Credotor::query()->where('application_id','=',$application->id)->orderBy('id')->get();
+        $creditors=Credotor::query()->where('application_id','=',$application->id)->where('name','!=',null)->orderBy('id')->get();
         $users=User::query()->where('role','=','user')->orderBy('id')->get();
         $creditors_amount=Credotor::query()->where('application_id','=',$application->id)->count();
 
@@ -1237,6 +1265,7 @@ class DocumentsController extends Controller
             'water_transports',
             'air_transports',
             'other_transports',
+            'creditors'
         ]));
     }
 
@@ -1248,7 +1277,8 @@ class DocumentsController extends Controller
         $creditors=Credotor::query()->where('application_id','=',$application->id)->where('name','!=','NULL')->orderBy('id')->get();
         $users=User::query()->where('role','=','user')->orderBy('id')->get();
         $creditors_amount=Credotor::query()->where('application_id','=',$application->id)->count();
-        $obligatory_payments=ObligatoryPayment::query()->where('application_id','=',$application->id)->get();
+        $obligatory_payments=ObligatoryPayment::query()->where('application_id','=',$application->id)->where('tax_name','!=',null)->get();
+        $monetary_obligations=MonetaryObligations::query()->where('application_id','=',$application->id)->where('creditor','!=',null)->get();
 
         $current_passport=UserCurrentPassport::query()->where('application_id','=',$application->id)->orderBy('id')->get();
         $old_passport=OldPassport::query()->where('application_id','=',$application->id)->orderBy('id')->get();
@@ -1288,6 +1318,7 @@ class DocumentsController extends Controller
             'other_transports',
             'creditors',
             'obligatory_payments',
+            'monetary_obligations',
         ]));
     }
 

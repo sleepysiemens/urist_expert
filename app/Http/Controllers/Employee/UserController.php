@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(User $user)
     {
-        $users=User::query()->where('role','=','user')->where('employee_id','=',auth()->user()->id)->get();
+        $users=User::query()->where('role','=','user')->get();
         $applications=Application::query()->where('user_id','=',$user->id)->get();
         if(isset($application->employee_id))
         {

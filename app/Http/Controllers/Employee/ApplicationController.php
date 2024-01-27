@@ -34,6 +34,16 @@ use App\Models\OldPassport;
 
 class ApplicationController extends Controller
 {
+
+    public function update(Application $application)
+    {
+        $data=request()->validate(['employee_id'=>'required|integer']);
+
+        $application->update($data);
+
+        return redirect()->route('employee.main.index');
+    }
+
     public function destroy(Application $application)
     {
         $buffer=UserDoc::query()->where('application_id', '=', $application->id);$buffer->delete();

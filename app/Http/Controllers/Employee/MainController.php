@@ -14,9 +14,8 @@ class MainController extends Controller
     public function index()
     {
         $applications=Application::all();
-        $applications=Application::query()->where('employee_id','=',auth()->user()->id)->get();
         $employees=User::query()->where('role','=','employee')->get();
-        $users=User::query()->where('role','=','user')->get();
+        $users=User::query()->where('role','=','user')->where('employee_id','=',auth()->user()->id)->get();
 
         return view('employee.index', compact(['applications', 'employees', 'users']));
     }
